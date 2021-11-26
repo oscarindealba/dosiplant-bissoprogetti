@@ -1,0 +1,115 @@
+html,
+body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+}
+
+#wrapper {
+    padding-bottom: 81px;
+    min-height: calc(100% - 20px);
+    position: relative;
+}
+
+.container {
+    padding: calc(150px - 1%);
+    position: fixed;
+    margin-left: -100px;
+    margin-right: 150px;
+    width: 110;
+    max-width: 110%;
+    max-height: 87%;
+}
+
+header {
+    color: white;
+    background-color: #0086CD;
+}
+
+footer {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.884);
+    width: 100%;
+    height: 95px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.bisoprogetti {
+    width: 99%;
+    display: inline-block;
+    position: absolute;
+}
+
+.control {
+    width: 10%;
+    display: inline-block;
+}
+
+.topmenu {
+    background-color: rgb(225, 225, 225);
+}
+
+.marslogo {
+    margin-left: 38%;
+    margin-top: 0%;
+    width: 40%;
+}
+
+.bienvenida {
+    margin-left: 50%;
+    margin-top: 21%;
+    width: 40%;
+}
+
+.iconos {
+    margin-top: 4%;
+    position: relative;
+    width: 98%;
+}
+
+.fondoiconos {
+    background-color: rgb(223, 218, 223);
+    width: 100%;
+    display: inline-block;
+    position: absolute;
+}
+
+.logocliente {
+    margin-top: 4%;
+    margin-right: 3%;
+    position: relative;
+    width: 98%;
+}
+
+.logoperdura {
+    margin-top: 15%;
+    position: relative;
+    width: 90%;
+}
+
+.cardtabla {
+    margin-top: -30px;
+    margin-left: -85px;
+    height: 420px;
+}
+
+@media (min-width: 1600px) {
+    .cardtabla {
+        height: 520px;
+        margin-top: -15px;
+    }
+}
+
+.tablaproduccion {
+    height: 35px;
+    table-layout: auto;
+    border-collapse: collapse;
+    width: 500px;
+    position: absolute;
+}
+
+.ctprod {
+    font-size: 0.9em;
+}

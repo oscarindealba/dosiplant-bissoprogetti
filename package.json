@@ -1,0 +1,38 @@
+{
+    "name": "dosiplantweb",
+    "version": "1.0.0",
+    "description": "Software para administración de plantas de alimentos para exploradores WEB",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "mascotas",
+        "batch",
+        "plantas",
+        "de",
+        "alimentos",
+        "automatizacion"
+    ],
+    "author": "Software de Occidente - Una empresa GFX - OODAP",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^0.19.2",
+        "axios-debug-log": "^0.7.0",
+        "bcryptjs": "^2.4.3",
+        "connect-flash": "^0.1.1",
+        "dotenv": "^10.0.0",
+        "express": "^4.17.1",
+        "express-handlebars": "^5.3.0",
+        "express-mysql-session": "^2.1.5",
+        "express-session": "^1.17.1",
+        "express-validator": "^6.13.0",
+        "hbs": "^4.1.1",
+        "kepserverex-js": "^1.0.6",
+        "passport": "^0.4.1",
+        "passport-local": "^1.0.0",
+        "socket.io": "^3.1.0",
+        "timeago.js": "^4.0.2"
+    }
+}

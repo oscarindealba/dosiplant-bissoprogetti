@@ -1,0 +1,46 @@
+    .bisoprogetti {
+        width: 99%;
+        display: inline-block;
+        position: absolute;
+    }
+    
+    html {
+        min-height: 100%;
+        position: relative;
+    }
+    
+    body {
+        margin: 0;
+        margin-bottom: 40px;
+    }
+    
+    footer {
+        background-color: black;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 120px;
+        color: blanchedalmond;
+        align-self: flex-end;
+    }
+    
+    .towermix {
+        width: 32%;
+        display: inline-block;
+    }
+    
+    .control {
+        width: 10%;
+        display: inline-block;
+    }
+    
+    .topmenu {
+        background-color: rgb(225, 225, 225);
+    }
+    
+    .marslogo {
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20rem;
+    }

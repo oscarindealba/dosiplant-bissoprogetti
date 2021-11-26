@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+
+  {{>header}}
+
+    <body data-layout="horizontal-tab">
+ <div class="container-fluid">
+            <!-- Log In page -->
+            <div class="row vh-100">
+                <div class="col-lg-3 pr-0">
+                    <div class="auth-page">
+                        <div class="card mb-0 shadow-none h-100">
+                            <div class="card-body">
+            
+                                <div class="mb-5">
+                                    <a href="../crm/crm-index.html" class="logo logo-admin">
+                                        <span><img src="images/001A BISSO LOGO.svg" height="70" alt="logo" class="my-3"></span>     
+                                    </a>
+                                </div>
+            
+                                <div class="px-3">
+                                    <h2 class="font-weight-semibold font-22 mb-2">Bienvinid@ a <span class="text-primary">MARS.</span></h2>
+                                    {{!-- <p class="text-muted">Redefiniendo la trazabilidad</p> --}}
+
+                                    <ul class="nav-border nav nav-pills" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active font-weight-semibold" data-toggle="tab" href="#LogIn_Tab" role="tab">Ingresar al sistema</a>
+                                        </li>                                       
+                                    </ul>
+
+                                    <!-- Tab panes -->
+                                    <div class="tab-content">
+                                        <div class="tab-pane active p-3" id="LogIn_Tab" role="tabpanel">                                        
+                                            <form class="form-horizontal auth-form my-4" action="index.html">
+                
+                                                <div class="form-group">
+                                                    <label for="username">Usuario</label>
+                                                    <div class="input-group mb-3">
+                                                        <span class="auth-form-icon">
+                                                            <i data-feather="user" class="icon-sm"></i>
+                                                        </span>                                                                                                              
+                                                        <input type="text" class="form-control" name="username" id="username" placeholder="Ingresa tu usuario">
+                                                    </div>                                    
+                                                </div><!--end form-group--> 
+                    
+                                                <div class="form-group">
+                                                    <label for="userpassword">Contraseña</label>                                            
+                                                    <div class="input-group mb-3"> 
+                                                        <span class="auth-form-icon">
+                                                            <i data-feather="key" class="icon-sm"></i>
+                                                        </span>                                                       
+                                                        <input type="password" class="form-control" name="password" id="userpassword" placeholder="Ingresa tu contraseña">
+                                                    </div>                               
+                                                </div><!--end form-group--> 
+                    
+                                        
+                    
+                                                <div class="form-group mb-0 row">
+                                                    <div class="col-12 mt-2">
+                                                        <button class="btn btn-gradient-primary btn-round btn-block waves-effect waves-light" type="button">Ingresar <i class="fas fa-sign-in-alt ml-1"></i></button>
+                                                    </div><!--end col--> 
+                                                </div> <!--end form-group-->                           
+                                            </form><!--end form-->    
+                                        </div>    
+                                    </div> 
+                                </div>
+                                
+                                <div class="mt-3 text-center">
+                                    &copy; 2019 - 2021 Dosiplant; <span class="text-muted d-none d-sm-inline-block ">Una empresa GFX</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9 p-0 h-10vh d-flex justify-content-center" style="background-image: url(images/t02.png); background-size:cover ">
+
+                        <div class="account-title text-center text-white " style="margin-top: 16ch;">
+                          <div class="border w-200 mx-auto border-warning" style="margin-top: 10ch;"></div>
+                            <h4 class="mt-3 text-white"  >Redefiniendo la  <span class="text-warning">Trasabilidad</span> </h4>
+                         <div class="border w-200 mx-auto border-warning" </div>
+                      </div>
+                </div>
+                
+            </div>
+        </div>
+
+    </body>
+
+</html>
