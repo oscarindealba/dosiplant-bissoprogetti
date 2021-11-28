@@ -85,7 +85,7 @@ var chart = new ApexCharts(
     options
 );
 
-chart.render();
+// chart.render();
 
 
 // traffice chart
@@ -171,14 +171,14 @@ function getRangeRandom(yrange) {
     return Math.floor(Math.random() * (yrange.max - yrange.min + 1)) + yrange.min
 }
 
-window.setInterval(function() {
+// window.setInterval(function() {
 
-    iteration++;
+//     iteration++;
 
-    chartCircle.updateSeries([getRangeRandom({ min: 10, max: 100 }), getRangeRandom({ min: 10, max: 100 })])
+//     chartCircle.updateSeries([getRangeRandom({ min: 10, max: 100 }), getRangeRandom({ min: 10, max: 100 })])
 
 
-}, 3000)
+// }, 3000)
 
 
 
