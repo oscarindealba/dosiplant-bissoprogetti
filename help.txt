@@ -1,0 +1,131 @@
+Para leer variables:
+http://127.0.0.1:39320/iotgateway/read?ids=plc.compac.Global.vol&ids=plc.compac.Global.Bit_uno
+
+Para escribir en variables:
+
+curl -H "Content-Type: application/json" -vX POST -d 
+"[{ \"id\": \"plc.compac.Global.Bit_uno\", \"v\": true},{ \"id\": \"plc.compac.Global.vol\", \"v\": 69}]" http://127.0.0.1:39320/iotgateway/write
+
+
+
+
+https://www.youtube.com/watch?v=WefzxLU0MQg
+
+PTC Logo
+IoT Gateway: REST (REST Server)
+The following are commands that may be used with this IoT Gateway REST Server:
+
+browse
+read
+write*
+The REST Server agent supports reading and writing of all data types except string arrays which can only be read.
+
+IoT Gateway Product Manual
+Click here for the IoT Gateway documentation.
+
+REST API
+Name	browse
+URL	http://127.0.0.1:39320/iotgateway/browse
+Format	json
+Method	GET
+Returns	200 OK if successful. A JSON object in the response body containing a list of groups.cURL example:
+curl -H "Content-Type: application/json" -v http://127.0.0.1:39320/iotgateway/browse
+JSON return value:
+{
+"browseResults": [
+{
+    "id": "Channel1.Device1.tag1"
+},
+{
+    "id": "Channel1.Device1.tag2"
+}
+],
+"succeeded": true,
+"reason": ""
+}
+Name	read
+URL	http://127.0.0.1:39320/iotgateway/read
+Format	json
+Method	GET
+Returns	200 OK if successful. A JSON object in the response body containing the tags that the user is authorized to browse.
+Example	http://127.0.0.1:39320/iotgateway/read?ids=Channel1.Device1.tag1&ids=Channel1.Device1.tag2cURL example:
+curl -H "Content-Type: application/json" -v http://127.0.0.1:39320/iotgateway/read?ids=Channel1.Device1.tag1
+JSON return value:
+{
+"readResults": [
+    {
+        "id": "Channel1.Device1.tag1",
+        "s": true,
+        "r": "",
+        "v": 263,
+        "t": 1442606724647
+    }
+]
+}
+Name	read
+URL	http://127.0.0.1:39320/iotgateway/read
+Format	json
+Method	POST
+Returns	200 OK if successful. A JSON object in the response body containing a list of read results.cURL example:
+curl -H "Content-Type: application/json" -vX POST -d "[\"Channel1.Device1.tag1\"]" http://127.0.0.1:39320/iotgateway/read
+JSON return value:
+{
+"readResults": [
+    {
+        "id": "Channel1.Device1.tag1",
+        "s": true,
+        "r": "",
+        "v": 557,
+        "t": 1442607022758
+    }
+]
+}
+Name	write
+URL	http://127.0.0.1:39320/iotgateway/write
+Format	json
+Method	POST
+Returns	200 OK if successful. A JSON object in the response body containing a list of write results.cURL example:
+curl -H "Content-Type: application/json" -vX POST -d "[{ \"id\": \"Channel1.Device1.tag1\", \"v\": 42},{ \"id\": \"Channel1.Device1.tag2\", \"v\": 17},{ \"id\": \"Channel1.Device1.tag3\", \"v\": 36}]" http://127.0.0.1:39320/iotgateway/write
+JSON return value:
+{
+"writeResults": [
+    {
+        "id": "Channel1.Device1.tag1",
+        "s": true,
+        "r": ""
+    },
+    {
+        "id": "Channel1.Device1.tag2",
+        "s": true,
+        "r": ""
+    },
+    {
+        "id": "Channel1.Device1.tag3",
+        "s": true,
+        "r": ""
+    }
+]
+}
+The tag names in the above examples must match those returned from the browse command.
+
+* Writes are only available when enabled in the REST Server interface and when used with writeable tags.
+
+When trying to connect to the REST Server from a web browser, the origin of the page being used needs to be added to the CORS Allowed Origins to permit access. Please refer to the IoT Gateway documentation for details on adding origins.
+
+Contact Information
+SALES
+Request a pre-sales consultation or pricing information.
+Phone: +1 888-KEPWARE x208
+Email: sales@kepware.com
+
+TECHNICAL SUPPORT
+Submit a ticket or check the status of an open case.
+Phone: +1 888-KEPWARE x211
+Email: technical.support@kepware.com
+
+ORDERS
+Place an order or check the status of an order.
+Phone: +1 888-KEPWARE x228
+Email: orders@kepware.com
+
+© 2021 PTC, All rights reserved.
