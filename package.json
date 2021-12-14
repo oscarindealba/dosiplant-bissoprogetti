@@ -4,7 +4,7 @@
     "description": "Software para administración de plantas de alimentos para exploradores WEB",
     "main": "server.js",
     "scripts": {
-        "start": "node server.js",
+        "start": "node app.js",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
     "keywords": [

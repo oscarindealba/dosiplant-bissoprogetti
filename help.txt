@@ -7,9 +7,15 @@ curl -H "Content-Type: application/json" -vX POST -d
 "[{ \"id\": \"plc.compac.Global.Bit_uno\", \"v\": true},{ \"id\": \"plc.compac.Global.vol\", \"v\": 69}]" http://127.0.0.1:39320/iotgateway/write
 
 
-
+-------------------------------------------------------------------direcciones-------------
 
 https://www.youtube.com/watch?v=WefzxLU0MQg
+
+https://www.youtube.com/watch?v=UdCXYphLqCs
+
+
+
+-----------------------------------------------------------------------------------------------
 
 PTC Logo
 IoT Gateway: REST (REST Server)
