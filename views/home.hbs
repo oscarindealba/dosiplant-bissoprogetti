@@ -1,17 +1,160 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
   {{>header}}
 
-    <body data-layout="horizontal-tab">
-       <div id="wrapper">
-            {{>topbar}}
+<body id="body">
+   
+    
+    <!-- Top Bar Start -->
+     {{>sidebar}}
+    <!-- Top Bar Start -->
+    <div class="topbar">            
+        <!-- Navbar -->
+        <nav class="navbar-custom" id="navbar-custom">    
+            <ul class="list-unstyled topbar-nav float-end mb-0">
+              <li class=>
+                       
+                        
+                    </li><!--end topbar-language-->
+                <li class=>
+                        <a class="list-unstyled topbar-nav mb-0" >
+                        <img src="assets/images/logo-1.png" alt="" class="logo">
+                    </a>
+                        
+                    </li><!--end topbar-language-->
+                     
+                       <li >
+                        <a class="nav-link  arrow-none nav-icon"  href="#" role="button"
+                            aria-haspopup="false" aria-expanded="false">
+                            <i class="ti ti-mail"></i>
+                        </a>
+                        
+                    </li>
 
-            {{>1_homePartial}}    
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle nav-user" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="false" aria-expanded="false">
+                        <div class="d-flex align-items-center">
+                            <img src="assets/images/users/user-4.jpg" alt="profile-user" class="rounded-circle me-2 thumb-sm" />
+                            <div>
+                                <small class="d-none d-md-block font-11">Admin</small>
+                                <span class="d-none d-md-block fw-semibold font-12">{{userlogin}} <i
+                                        class="mdi mdi-chevron-down"></i></span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <a class="dropdown-item" href="#"><i class="ti ti-user font-16 me-1 align-text-bottom"></i> Perfil</a>
+                        <a class="dropdown-item" href="#"><i class="ti ti-settings font-16 me-1 align-text-bottom"></i> Configuración</a>
+                        <div class="dropdown-divider mb-0"></div>
+                        <a class="dropdown-item" href="#"><i class="ti ti-power font-16 me-1 align-text-bottom"></i> Cerrar sesión</a>
+                    </div>
+                </li><!--end topbar-profile-->
+                <li class="notification-list">
+                    <a class="nav-link arrow-none nav-icon offcanvas-btn" href="#" data-bs-toggle="offcanvas" data-bs-target="#Appearance" role="button" aria-controls="Rightbar">
+                        <i class="ti ti-settings ti-spin"></i>
+                    </a>
+                </li> 
 
+                <li>
+                        <button class="nav-link button-menu-mobile nav-icon" id="togglemenu">
+                            <i class="ti ti-menu-2"></i>
+                        </button>
+                    </li>   
+            </ul><!--end topbar-nav-->
+
+            <ul class="list-unstyled topbar-nav mb-0">                        
+                
+                                      
+            </ul>
+        </nav>
+        <!-- end navbar-->
+    </div>
+    <!-- Top Bar End -->
+    <!-- Top Bar End -->
+
+    <div class="page-wrapper">
+
+        <!-- Page Content-->
+        <div class="page-content-tab">
+
+            <div class="container-fluid">
+                <!-- Page-Title -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="page-title-box">
+                            
+                            <h4 class="page-title">Bienvenido</h4>
+                        </div>
+                        <!--end page-title-box-->
+                    </div>
+                    <!--end col-->
+                </div>
+                <!-- end page title end breadcrumb -->
+
+
+            </div>
+            <!-- container -->
+
+            <!--Start Rightbar-->
+            <!--Start Rightbar/offcanvas-->
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="Appearance" aria-labelledby="AppearanceLabel">
+                <div class="offcanvas-header border-bottom">
+                  <h5 class="m-0 font-14" id="AppearanceLabel">Appearance</h5>
+                  <button type="button" class="btn-close text-reset p-0 m-0 align-self-center" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">  
+                    <h6>Account Settings</h6>
+                    <div class="p-2 text-start mt-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch1">
+                            <label class="form-check-label" for="settings-switch1">Auto updates</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch2" checked>
+                            <label class="form-check-label" for="settings-switch2">Location Permission</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="settings-switch3">
+                            <label class="form-check-label" for="settings-switch3">Show offline Contacts</label>
+                        </div><!--end form-switch-->
+                    </div><!--end /div-->
+                    <h6>General Settings</h6>
+                    <div class="p-2 text-start mt-3">
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch4">
+                            <label class="form-check-label" for="settings-switch4">Show me Online</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch mb-2">
+                            <input class="form-check-input" type="checkbox" id="settings-switch5" checked>
+                            <label class="form-check-label" for="settings-switch5">Status visible to all</label>
+                        </div><!--end form-switch-->
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" id="settings-switch6">
+                            <label class="form-check-label" for="settings-switch6">Notifications Popup</label>
+                        </div><!--end form-switch-->
+                    </div><!--end /div-->               
+                </div><!--end offcanvas-body-->
+            </div>
+            <!--end Rightbar/offcanvas-->
+            <!--end Rightbar-->
+
+            <!--Start Footer-->
+            <!-- Footer Start -->
             {{>footer}}
-      </div>
-     {{>scripts_}}
-    </body>
+            <!-- end Footer -->
+            <!--end footer-->
+        </div>
+        <!-- end page content -->
+    </div>
+    <!-- end page-wrapper -->
+
+    <!-- Javascript  -->
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
+
+</body>
+<!--end body-->
 
 </html>

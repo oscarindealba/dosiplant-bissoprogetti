@@ -20,7 +20,7 @@ const port = process.env.PORT || 3010;
 
 
 require("./hbs/helpers");
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(__dirname + "/dist"));
 
 
 //Express HBS engine
@@ -28,7 +28,9 @@ hbs.registerPartials(__dirname + "/views/partials");
 app.set("view engine", "hbs");
 
 app.get("/", (req, res) => {
-    res.render("home");
+    res.render("home", {
+        userlogin: "Oscar de Alba",
+    });
 });
 
 app.get("/produccion", (req, res) => {
