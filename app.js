@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require('path');
+const mysql = require('mysql');
 require('dotenv').config();
 const exphbs = require('express-handlebars');
 const session = require('express-session');
@@ -13,12 +14,35 @@ const app = express();
 const hbs = require("hbs");
 const http = require('http');
 let server = http.createServer(app);
+let conexion = mysql.createConnection({
+    host: 'localhost',
+    database: 'mars_dsp',
+    user: 'root',
+    password: 'AbcD1234',
+});
+
 const port = process.env.PORT || 3010;
 
 
 //---------------------------------------------------------------------------------
 
+conexion.connect((error) => {
+    if (error) {
+        throw error;
+    } else {
+        console.log('La conexion con la base de datos fue establecida');
+    }
+});
 
+let { ab, bc } = conexion.query('SELECT * from usuarios', (error, result, fields) => {
+    if (error)
+        throw error;
+    result.forEach(result => {
+        // console.log(result);
+    });
+});
+console.log(ab);
+conexion.end();
 require("./hbs/helpers");
 app.use(express.static(__dirname + "/dist"));
 

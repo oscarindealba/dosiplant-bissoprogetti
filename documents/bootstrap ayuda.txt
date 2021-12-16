@@ -1,0 +1,10 @@
+para ocultar componentes
+<div class="d-none d-sm-none d-md-block">Este texto solo visible para escritorio</div>
+<div class="d-block d-sm-block d-md-none">Este texto solo visible para smartphone</div>
+
+PDF
+
+https://www.youtube.com/watch?v=bSmUSLL2qKA
+
+SQL 
+https://www.youtube.com/watch?v=zsnHIlsUPSU
