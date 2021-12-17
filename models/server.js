@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const hbs = require("hbs");
 const http = require('http');
 hbs.registerPartials(__dirname + '/../views/partials');
@@ -10,6 +11,7 @@ class Server {
         this.app = express();
         this.servidor = http.createServer(this.app);
         this.port = process.env.PORT || 3010;
+        this.apiPath = '/api/usuarios';
 
 
         //middlewares
@@ -21,6 +23,14 @@ class Server {
     }
 
     middlewares() {
+
+        //CORS
+        this.app.use(cors());
+
+        //LECTURA Y PARSEO
+
+        this.app.use(express.json());
+
         this.app.use(express.static(__dirname + '/../dist'));
         this.app.set("view engine", "hbs");
 
@@ -28,40 +38,9 @@ class Server {
 
     routes() {
 
-        this.app.get("/", (req, res) => {
-            res.render("home"); //, {
-            // userlogin: "Oscar de Alba",
-            //});
-        });
+        this.app.use(this.apiPath, require('../routes/user'));
+        this.app.use('/', require('../routes/pages'));
 
-        this.app.get("/produccion", (req, res) => {
-            res.render("produccion", {
-                userlogin: "Oscar de Alba",
-
-            });
-        });
-
-        this.app.get("/realvssp", (req, res) => {
-            res.render("realvssp", {
-                userlogin: "Oscar de Alba",
-
-            });
-        });
-
-        this.app.get("/operacion", (req, res) => {
-            res.render("operacion", {
-                userlogin: "Oscar de Alba",
-
-            });
-        });
-
-
-        this.app.get("/login", (req, res) => {
-            res.render("login", {
-                userlogin: "Oscar de Alba",
-
-            });
-        });
     }
 
     listen() {
