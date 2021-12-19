@@ -135,3 +135,7 @@ Phone: +1 888-KEPWARE x228
 Email: orders@kepware.com
 
 © 2021 PTC, All rights reserved.
+
+
+
+http://127.0.0.1:39320/iotgateway/read?ids=plc.compac.Planta.Global.F9_x.F9_250&ids=plc.compac.Planta.Global.F9_x.F9_251&ids=plc.compac.Planta.Global.F9_x.F9_252&ids=plc.compac.Planta.Global.F9_x.F9_253&ids=plc.compac.Planta.Global.F9_x.F9_254&ids=plc.compac.Planta.Global.F8_x.F8_025&ids=plc.compac.Planta.Global.F8_x.F8_026&ids=plc.compac.Planta.Global.F8_x.F8_027&ids=plc.compac.Planta.Global.F8_x.F8_028&ids=plc.compac.Planta.Global.F8_x.F8_029&ids=plc.compac.Planta.Global.F14_x.F14_250&ids=plc.compac.Planta.Global.F14_x.F14_251

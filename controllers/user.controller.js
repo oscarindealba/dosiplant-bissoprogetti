@@ -1,20 +1,23 @@
-const { response } = require('express');
+const { response, request } = require('express');
+const bcryptjs = require('bcryptjs');
+const Usuario = require('../models/user.model');
+
+
 
 
 const usuariosGet = (req, res = response) => {
-    const query = req.query;
+    const nombre = req.query;
     res.json({
         mensaje: 'get - Controlador',
-        query
+        nombre: 'oscar'
     });
 };
 
 const usuariosPost = (req, res = response) => {
-    const { id, nombre } = req.body;
+    const { nombre, password, rol } = req.body;
+    const usuario = Usuario.build({ nombre, password, rol });
     res.json({
-        mensaje: 'post - Controlador',
-        nombre,
-        id
+        usuario
     });
 };
 

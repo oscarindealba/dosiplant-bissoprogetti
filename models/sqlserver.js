@@ -1,7 +1,7 @@
 const mysql = require('mysql');
 
 
-class Sqlserver {
+class Serversql {
 
     constructor() {
 
@@ -12,11 +12,13 @@ class Sqlserver {
             password: 'AbcD1234',
         });
         this.initconexion();
+        this.querySelect();
+        this.conexion.end();
     }
 
-    initconexion() {
+    async initconexion() {
 
-        this.conexion.connect((error) => {
+        await this.conexion.connect((error) => {
             if (error) {
                 throw error;
             } else {
@@ -27,18 +29,18 @@ class Sqlserver {
 
     querySelect() {
 
-        let { ab, bc } = this.conexion.query('SELECT * from usuarios', (error, result, fields) => {
+        let datos = this.conexion.query('SELECT * from usuario', (error, result, fields) => {
             if (error)
                 throw error;
             result.forEach(result => {
-                // console.log(result);
+                console.log(result);
             });
         });
-        console.log(ab);
-        conexion.end();
+
+
 
     }
 
 }
 
-module.exports = Sqlserver;
+module.exports = Serversql;
