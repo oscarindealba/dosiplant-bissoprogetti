@@ -1,58 +1,24 @@
-const API_USERS = "http://localhost:8081/api/consumos/";
-const xhr = new XMLHttpRequest();
+/**
+ * Theme: Metrica - Responsive Bootstrap 5 Admin Dashboard
+ * Author: Mannatthemes
+ * Datatables Js
+ */
+//define data array
+var tabledata = [
+    { id: 1, name: "Oli Bob", id: 6, other: "male", receta: "Receta 1", silo: 4, timest: "19/02/1984 13:25", peso: 850 },
+    { id: 2, name: "Mary May", id: 5, gender: "female", receta: "Receta 1", silo: 3, timest: "14/05/1982", peso: 320 },
+    { id: 3, name: "Christine Lobowski", id: 4, gender: "female", receta: "Receta 1", silo: 2, timest: "22/05/1982", peso: 450 },
+    { id: 4, name: "Brendon Philips", id: 3, gender: "male", receta: "Receta 2", silo: 5, timest: "01/08/1980", peso: 210 },
+    { id: 5, name: "Margret Marmajuke", id: 2, gender: "female", receta: "Receta 2", silo: 3, timest: "31/01/1999", peso: 587 },
+    { id: 6, name: "Frank Harbours", id: 1, gender: "male", receta: "Receta 2", silo: 2, timest: "12/05/1966", peso: 25 },
+    { id: 1, name: "Oli Bob", id: 12, gender: "male", receta: 1, silo: "red", timest: "19/02/1984", peso: 1 },
+    { id: 2, name: "Mary May", id: 1, gender: "female", receta: 2, silo: "blue", timest: "14/05/1982", peso: true },
+    { id: 3, name: "Christine Lobowski", id: 42, gender: "female", receta: 0, silo: "green", timest: "22/05/1982", peso: "true" },
+    { id: 4, name: "Brendon Philips", id: 100, gender: "male", receta: 1, silo: "orange", timest: "01/08/1980" },
+    { id: 5, name: "Margret Marmajuke", id: 16, gender: "female", receta: 5, silo: "yellow", timest: "31/01/1999" },
+    { id: 6, name: "Frank Harbours", id: 38, gender: "male", receta: 4, silo: "red", timest: "12/05/1966", peso: 1 },
+];
 
-
-
-function onRequestHandler() {
-
-    if (this.readyState === 4 && this.status === 200) {
-
-        const datosTabla = JSON.parse(this.response);
-
-
-
-        var table = new Tabulator("#datatable-3", {
-            layout: "fitDataFill",
-            height: "310px",
-            responsiveLayout: "collapse",
-            rowContextMenu: rowMenu, //add context menu to rows
-            columns: [
-                // { title: "ID", field: "id", sorter: "number", headerMenu: headerMenu }, //add menu to this column header
-                { title: "Marca de tiempo", field: "createdAt", headerMenu: headerMenu },
-                { title: "Tipo", field: "gruposilo", hozAlign: "center", headerMenu: headerMenu },
-                { title: "Numero de silo", field: "numsilo", hozAlign: "center", headerMenu: headerMenu },
-                { title: "SetPoint", field: "setpoint", hozAlign: "center", headerMenu: headerMenu },
-            ],
-            data: datosTabla,
-        });
-
-
-    }
-}
-
-const datos = xhr.addEventListener("load", onRequestHandler);
-xhr.open("GET", API_USERS);
-xhr.send();
-console.log(datos);
-
-// var tabledata = [
-//     { id: 1, name: "Oli Bob", id: 6, other: "male", receta: "Receta 1", silo: 4, timest: "19/02/1984 13:25", peso: 850 },
-//     { id: 2, name: "Mary May", id: 5, gender: "female", receta: "Receta 1", silo: 3, timest: "14/05/1982", peso: 320 },
-//     { id: 3, name: "Christine Lobowski", id: 4, gender: "female", receta: "Receta 1", silo: 2, timest: "22/05/1982", peso: 450 },
-//     { id: 4, name: "Brendon Philips", id: 3, gender: "male", receta: "Receta 2", silo: 5, timest: "01/08/1980", peso: 210 },
-//     { id: 5, name: "Margret Marmajuke", id: 2, gender: "female", receta: "Receta 2", silo: 3, timest: "31/01/1999", peso: 587 },
-//     { id: 6, name: "Frank Harbours", id: 1, gender: "male", receta: "Receta 2", silo: 2, timest: "12/05/1966", peso: 25 },
-//     { id: 1, name: "Oli Bob", id: 12, gender: "male", receta: 1, silo: "red", timest: "19/02/1984", peso: 1 },
-//     { id: 2, name: "Mary May", id: 1, gender: "female", receta: 2, silo: "blue", timest: "14/05/1982", peso: true },
-//     { id: 3, name: "Christine Lobowski", id: 42, gender: "female", receta: 0, silo: "green", timest: "22/05/1982", peso: "true" },
-//     { id: 4, name: "Brendon Philips", id: 100, gender: "male", receta: 1, silo: "orange", timest: "01/08/1980" },
-//     { id: 5, name: "Margret Marmajuke", id: 16, gender: "female", receta: 5, silo: "yellow", timest: "31/01/1999" },
-//     { id: 6, name: "Frank Harbours", id: 38, gender: "male", receta: 4, silo: "red", timest: "12/05/1966", peso: 1 },
-// ];
-
-//var tabledata = ;
-//var tabledata = [{ "id": 1, "nombre": "Oscar", "password": "1234", "estado": 49, "createdAt": "2021-12-19T03:15:06.000Z", "updatedAt": null }, { "id": 2, "nombre": "Isabella", "password": "225555", "estado": 49, "createdAt": "2021-12-19T03:41:40.000Z", "updatedAt": "2021-12-19T03:41:40.000Z" }, { "id": 3, "nombre": "Maximiliano", "password": "5154585252", "estado": 49, "createdAt": "2021-12-19T04:17:35.000Z", "updatedAt": "2021-12-19T04:17:35.000Z" }, { "id": 4, "nombre": "Maximiliano", "password": "5154585252", "estado": 49, "createdAt": "2021-12-19T04:22:47.000Z", "updatedAt": "2021-12-19T04:22:47.000Z" }];
-//console.log(onRequestHandler());
 
 var consumos = [
     { silo: 1, consumo: 676 },
@@ -190,20 +156,20 @@ var headerMenu = function() {
 };
 
 //initialize table
-// var table = new Tabulator("#datatable-3", {
-//     layout: "fitDataFill",
-//     height: "310px",
-//     responsiveLayout: "collapse",
-//     rowContextMenu: rowMenu, //add context menu to rows
-//     columns: [
-//         { title: "ID", field: "id", sorter: "number", headerMenu: headerMenu }, //add menu to this column header
-//         { title: "Marca de tiempo", field: "createdAt", headerMenu: headerMenu },
-//         { title: "Receta", field: "nombre", hozAlign: "center", headerMenu: headerMenu },
-//         { title: "Numero de silo", field: "password", hozAlign: "center", headerMenu: headerMenu },
-//         { title: "Peso agregado", field: "estado", hozAlign: "center", headerMenu: headerMenu },
-//     ],
-//     data: tabledata,
-// });
+var table = new Tabulator("#datatable-3", {
+    layout: "fitDataFill",
+    height: "310px",
+    responsiveLayout: "collapse",
+    rowContextMenu: rowMenu, //add context menu to rows
+    columns: [
+        { title: "ID", field: "id", sorter: "number", headerMenu: headerMenu }, //add menu to this column header
+        { title: "Marca de tiempo", field: "timest", headerMenu: headerMenu },
+        { title: "Receta", field: "receta", hozAlign: "center", headerMenu: headerMenu },
+        { title: "Numero de silo", field: "silo", hozAlign: "center", headerMenu: headerMenu },
+        { title: "Peso agregado", field: "peso", hozAlign: "center", headerMenu: headerMenu },
+    ],
+    data: tabledata,
+});
 
 //trigger download of data.csv file
 // document.getElementById("download-csv").addEventListener("click", function() {

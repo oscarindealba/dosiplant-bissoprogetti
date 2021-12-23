@@ -1,12 +1,11 @@
-const { Sequelize, Model, DataTypes } = require('sequelize');
-const sequelize = new Sequelize('sqlite::memory:');
+const { DataTypes } = require('sequelize');
+const db = require('./sqlserver');
 
 
 
-
-const Usuario = sequelize.define("Usuario", {
+const Usuario = db.define("Usuario", {
     nombre: {
-        type: Sequelize.STRING(12),
+        type: DataTypes.STRING(12),
         allowNull: false,
         validate: {
             notNull: {
@@ -15,13 +14,17 @@ const Usuario = sequelize.define("Usuario", {
         }
     },
     password: {
-        type: Sequelize.STRING(12),
+        type: DataTypes.STRING(12),
         allowNull: false
     },
 
 
-    estado: { type: Sequelize.BOOLEAN, allowNull: false, defaultValue: true },
-}, { Sequelize, DataTypes });
+    estado: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
+    },
+}, { db, DataTypes });
 
 
 
