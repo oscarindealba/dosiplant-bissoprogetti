@@ -8,22 +8,50 @@ function onRequestHandler() {
     if (this.readyState === 4 && this.status === 200) {
 
         const datosTabla = JSON.parse(this.response);
-
+        const datTabl2 = datosTabla[0];
+        const datTabl1 = datosTabla[1];
+        console.log(datTabl2);
 
 
         var table = new Tabulator("#datatable-3", {
             layout: "fitDataFill",
-            height: "310px",
+            height: "510px",
+            pagination: "local",
+            paginationSize: 10,
+            addRowPos: "top",
             responsiveLayout: "collapse",
-            rowContextMenu: rowMenu, //add context menu to rows
+            movableColumns: true,
+            resizableRows: false,
+            initialSort: [
+                { column: "createdAt", dir: "desc" },
+            ],
+            rowContextMenu: rowMenu,
             columns: [
                 // { title: "ID", field: "id", sorter: "number", headerMenu: headerMenu }, //add menu to this column header
                 { title: "Marca de tiempo", field: "createdAt", headerMenu: headerMenu },
-                { title: "Tipo", field: "gruposilo", hozAlign: "center", headerMenu: headerMenu },
+                { title: "Formula", field: "formula", hozAlign: "center", headerMenu: headerMenu },
                 { title: "Numero de silo", field: "numsilo", hozAlign: "center", headerMenu: headerMenu },
-                { title: "SetPoint", field: "setpoint", hozAlign: "center", headerMenu: headerMenu },
+                { title: "Tipo", field: "gruposilo", hozAlign: "center", headerMenu: headerMenu },
+                { title: "Peso Agregado", field: "setpoint", hozAlign: "center", headerMenu: headerMenu },
             ],
-            data: datosTabla,
+            data: datTabl1,
+        });
+
+        var table = new Tabulator("#datatable-2", {
+            layout: "fitColumns",
+            height: "510px",
+            responsiveLayout: "collapse",
+            autoColumns: false,
+            data: datTabl2,
+            columns: [
+                { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: true },
+                { title: "Numero de  Silo", field: "silo", width: 150, hozAlign: "center", },
+                { title: "Consumo en Kg", field: "consumo", hozAlign: "center", sorter: "number", width: 150 },
+
+
+            ],
+
+            // autoColumns:true,
         });
 
 
@@ -33,7 +61,8 @@ function onRequestHandler() {
 const datos = xhr.addEventListener("load", onRequestHandler);
 xhr.open("GET", API_USERS);
 xhr.send();
-console.log(datos);
+
+
 
 // var tabledata = [
 //     { id: 1, name: "Oli Bob", id: 6, other: "male", receta: "Receta 1", silo: 4, timest: "19/02/1984 13:25", peso: 850 },
@@ -54,15 +83,34 @@ console.log(datos);
 //var tabledata = [{ "id": 1, "nombre": "Oscar", "password": "1234", "estado": 49, "createdAt": "2021-12-19T03:15:06.000Z", "updatedAt": null }, { "id": 2, "nombre": "Isabella", "password": "225555", "estado": 49, "createdAt": "2021-12-19T03:41:40.000Z", "updatedAt": "2021-12-19T03:41:40.000Z" }, { "id": 3, "nombre": "Maximiliano", "password": "5154585252", "estado": 49, "createdAt": "2021-12-19T04:17:35.000Z", "updatedAt": "2021-12-19T04:17:35.000Z" }, { "id": 4, "nombre": "Maximiliano", "password": "5154585252", "estado": 49, "createdAt": "2021-12-19T04:22:47.000Z", "updatedAt": "2021-12-19T04:22:47.000Z" }];
 //console.log(onRequestHandler());
 
-var consumos = [
-    { silo: 1, consumo: 676 },
-    { silo: 2, consumo: 10563 },
-    { silo: 3, consumo: 574 },
-    { silo: 4, consumo: 20563 },
-    { silo: 5, consumo: 5222 },
-    { silo: 6, consumo: 778 },
-    { silo: 7, consumo: 8582 },
-
+var consumos = [{
+        "silo": 1,
+        "consumo": 109869
+    },
+    {
+        "silo": 2,
+        "consumo": 43903
+    },
+    {
+        "silo": 3,
+        "consumo": 27133
+    },
+    {
+        "silo": 4,
+        "consumo": 22355
+    },
+    {
+        "silo": 5,
+        "consumo": 30641
+    },
+    {
+        "silo": 6,
+        "consumo": 29761
+    },
+    {
+        "silo": 7,
+        "consumo": 11109
+    }
 ];
 
 // var table = new Tabulator("#datatable-1", {
@@ -92,22 +140,7 @@ var consumos = [
 
 
 
-var table = new Tabulator("#datatable-2", {
-    layout: "fitColumns",
-    height: "310px",
-    responsiveLayout: "collapse",
-    autoColumns: false,
-    data: consumos,
-    columns: [
-        { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: true },
-        { title: "Num Silo", field: "silo", width: 150, hozAlign: "center", },
-        { title: "Consumo en Kg", field: "consumo", hozAlign: "center", sorter: "number", width: 150 },
 
-
-    ],
-
-    // autoColumns:true,
-});
 
 // Menu
 

@@ -41,6 +41,8 @@ CREATE TABLE IF NOT EXISTS `mars_dsp`.`consumos` (
   `formula` VARCHAR(45) NOT NULL DEFAULT 'Pegapiso',
   `setpoint` FLOAT NOT NULL,
   `real` FLOAT NULL,
+  `iduser` INT NOT NULL DEFAULT 1,
+  `turno` INT NOT NULL DEFAULT 1,
   `createdAt` TIMESTAMP NULL,
   `updatedAt` TIMESTAMP NULL,
   PRIMARY KEY (`id`))
