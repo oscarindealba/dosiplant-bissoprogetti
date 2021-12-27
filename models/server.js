@@ -65,9 +65,6 @@ class Server {
         this.app.set("view engine", "hbs");
         this.app.use(bodyParser.json())
         this.app.use(bodyParser.urlencoded({ extended: true }))
-
-
-
     }
 
     routes() {
