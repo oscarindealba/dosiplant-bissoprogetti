@@ -12,7 +12,7 @@ const consumoGet = async(req, res = response) => {
     const resSum = await Consumo.findAll({
         attributes: [
             ['numsilo', 'silo'],
-            [Sequelize.fn('SUM', Sequelize.col('setpoint')), 'consumo']
+            [Sequelize.fn('SUM', Sequelize.col('real')), 'consumo']
         ],
         group: ['Consumo.numsilo'],
         raw: true

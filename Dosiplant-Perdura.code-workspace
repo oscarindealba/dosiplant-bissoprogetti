@@ -1,9 +1,8 @@
 {
-    "folders": [
+	"folders": [
 		{
-			"name": "Dosiplant-Mars",
 			"path": "."
 		}
 	],
-    "settings": {}
+	"settings": {}
 }

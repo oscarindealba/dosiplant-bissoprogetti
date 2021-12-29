@@ -8,7 +8,7 @@ const http = require('http');
 const axios = require('axios').default;
 const { sumaSilos } = require("../controllers/consumos.controller");
 
-const baseURL = 'http://localhost:39320/iotgateway/read?ids=plc.compac.Planta.Global.F8_x.F8_020&ids=plc.compac.Planta.Global.F9_x.F9_250&ids=plc.compac.Planta.Global.F9_x.F9_251&ids=plc.compac.Planta.Global.F9_x.F9_252&ids=plc.compac.Planta.Global.F9_x.F9_253&ids=plc.compac.Planta.Global.F9_x.F9_254&ids=plc.compac.Planta.Global.F8_x.F8_025&ids=plc.compac.Planta.Global.F8_x.F8_026&ids=plc.compac.Planta.Global.F8_x.F8_027&ids=plc.compac.Planta.Global.F8_x.F8_028&ids=plc.compac.Planta.Global.F8_x.F8_029';
+const baseURL = 'http://localhost:39320/iotgateway/read?ids=plc.compac.Planta.Global.F8_x.F8_020&ids=plc.casa.Global.timer1.ACC';
 const salvaconsURL = "http://localhost:8081/api/consumos/";
 const sumsilosURL = "http://localhost:8081/api/consumos/sum"
     //const vars = [{ "id": "plc.casa.Global.timer1.ACC" }, { "id": "plc.casa.Global.Salida1" }];
@@ -17,7 +17,7 @@ let keybucle = false;
 let counter = 0;
 
 hbs.registerPartials(__dirname + '/../views/partials');
-setInterval(triggerGet, 500);
+setInterval(triggerGet, 5000);
 
 
 class Server {
@@ -129,65 +129,37 @@ async function triggerGet() {
     try {
         const response = await axios.get(baseURL);
         const lectura = response.data.readResults;
-        let { v: real, t: timestamp } = lectura[0];
-        let { v: setP1 } = lectura[1];
-        let { v: setP2 } = lectura[2];
-        let { v: setP3 } = lectura[3];
-        let { v: setP4 } = lectura[4];
-        let { v: setP5 } = lectura[5];
-        let { v: realS1 } = lectura[6];
-        let { v: realS2 } = lectura[7];
-        let { v: realS3 } = lectura[8];
-        let { v: realS4 } = lectura[9];
-        let { v: realS5 } = lectura[10];
-
-        let sPA4 = setP4 + setP5;
-        let sPA3 = sPA4 + setP3;
-        let sPA2 = sPA3 + setP2;
-        let sPA1 = sPA2 + setP1;
-        let metasABS = [setP5, setP4, setP3, setP2, setP1];
-        let metas = [setP5, sPA4, sPA3, sPA2, sPA1];
-        let reales = [realS5, realS4, realS3, realS2, realS1, ];
-        //let { v: pesoBascula, t: timestamp } = lectura[0];
-        //let se = pesoBascula;
-
-        console.log(`Peso bascula ${real}`);
-        console.log(`metas ${metas[counter]}`);
-        console.log(`counter ${counter}`);
-        if (real >= metas[counter] && (counter == 0 || counter > last)) {
-            last = counter;
+        let { v: salida } = lectura[0];
+        let { v: timer, t: timestamp } = lectura[1];
+        let se = timestamp;
+        console.log(timer);
+        if (salida && se > last && !keybucle) {
+            keybucle = true;
+            counter = counter + 1;
+            if (counter > 7) {
+                counter = 1;
+            }
+            console.log(`Grabando registro: ${timestamp}`);
+            last = timestamp;
 
             const newreg = {
-                "numsilo": 5 - counter,
+                "numsilo": counter,
                 "gruposilo": "Cementantes",
                 "formula": "Pegapiso",
-                "setpoint": metasABS[counter],
-                "real": reales[counter],
+                "setpoint": timer,
+                "real": 23.5,
                 "iduser": 2,
                 "turno": 1
             }
 
-            if (metasABS[counter] >= 0) {
-
-                console.log(`Grabando registro: ${timestamp}`);
-                const salvarreg = axios.post(salvaconsURL, newreg);
-
-                console.log(`Peso setpoint ${ metas[counter]}`);
-                console.log(`Counter ${counter}`);
-            }
-            counter = 1 + counter;
-
+            const salvarreg = axios.post(salvaconsURL, newreg);
             console.log(`El valor de contador es ${counter}`);
-
-
+            console.log(timestamp);
 
         }
 
-        if (real <= 0 && counter >= 4) {
-            counter = 0;
-        }
-        if (counter > 4) {
-            counter = 4;
+        if (keybucle && !salida) {
+            keybucle = false;
         }
 
     } catch (error) {

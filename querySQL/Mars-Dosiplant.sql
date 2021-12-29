@@ -21,18 +21,7 @@ CREATE TABLE  IF NOT EXISTS `mars_dsp`.`roles` (
   `rol` VARCHAR(45) NOT NULL DEFAULT 'USER_ROLE',
   PRIMARY KEY (`id`));
 
-CREATE TABLE IF NOT EXISTS `mars_dsp`.`consumos` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `silo` floa(45) NOT NULL DEFAULT 'El nombre es obligatorio',
-  `setpoint` VARCHAR(45) NOT NULL DEFAULT 'La contraseña es obligatoria',
-  `img` VARCHAR(45) NULL,
-  `rol` VARCHAR(45) NOT NULL DEFAULT 'El rol es obligatorio',
-  `estado` BINARY(1)  DEFAULT TRUE,
-  `createdAt` TIMESTAMP,
-  `updatedAt` TIMESTAMP,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf8;
+
 
 CREATE TABLE IF NOT EXISTS `mars_dsp`.`consumos` (
   `id` INT NOT NULL AUTO_INCREMENT,
