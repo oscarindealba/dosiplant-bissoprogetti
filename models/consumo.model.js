@@ -3,7 +3,6 @@ const db = require('./sqlserver');
 
 
 
-
 const Consumo = db.define("Consumo", {
     numsilo: {
         type: DataTypes.INTEGER,
@@ -43,8 +42,17 @@ const Consumo = db.define("Consumo", {
         allowNull: false,
 
     },
+    numbatch: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+    },
+    numorden: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+
+    },
+    
 }, { db, DataTypes });
-
-
 
 module.exports = Consumo;

@@ -15,12 +15,12 @@ const sumsilosURL = "http://localhost:8081/api/consumos/sum"
 let last = 0;
 let keybucle = false;
 let counter = 0;
-let temnumbatch = 0;
-let bufferbatch = 0;
+let temnumbatch=0;
+let bufferbatch=0;
 
 
 hbs.registerPartials(__dirname + '/../views/partials');
-//setInterval(triggerGet, 500);
+setInterval(triggerGet, 500);
 
 
 class Server {
@@ -32,7 +32,6 @@ class Server {
         this.port = process.env.PORT || 3010;
         this.apiPath = '/api/usuarios';
         this.apiConsumos = '/api/consumos';
-        this.apiReportes = '/api/reportes';
 
 
         this.dbConnection();
@@ -75,7 +74,6 @@ class Server {
 
         this.app.use(this.apiPath, require('../routes/user'));
         this.app.use(this.apiConsumos, require('../routes/consumo'));
-        this.app.use(this.apiReportes, require('../routes/reportes'));
         // this.app.use(this.getAnio, require('../hbs/helpers'));
 
 
@@ -91,7 +89,7 @@ class Server {
 
             res.render("produccion", {
                 userlogin: "Oscar de Alba",
-                texto: '<button class="btn btn-outline-primary btn-sm mb-1 mb-xl-0" id="download-pdf">Descargar en  PDF</button>',
+                texto:'<button class="btn btn-outline-primary btn-sm mb-1 mb-xl-0" id="download-pdf">Descargar en  PDF</button>',
                 sumsilosGet: respuesta
             });
         });
@@ -105,20 +103,6 @@ class Server {
 
         this.app.get("/operacion", (req, res) => {
             res.render("operacion", {
-                userlogin: "Oscar de Alba",
-
-            });
-        });
-
-        this.app.get("/reportes", (req, res) => {
-            res.render("reportes", {
-                userlogin: "Oscar de Alba",
-
-            });
-        });
-
-        this.app.get("/bodyrep_1", (req, res) => {
-            res.render("bodyrep_1", {
                 userlogin: "Oscar de Alba",
 
             });
@@ -163,13 +147,13 @@ async function triggerGet() {
         let { v: tp2SP } = lectura[10];
         let { v: tp4SP } = lectura[11];
         let { v: nomreceta } = lectura[12];
-        let { v: tp2Real } = lectura[13];
-        let { v: tp4Real } = lectura[14];
-        let { v: quimic1 } = lectura[15];
-        let { v: quimic2 } = lectura[16];
-        let { v: numbatch } = lectura[17];
-        let { v: numorden } = lectura[18];
-
+        let { v: tp2Real}= lectura[13];
+        let { v: tp4Real}= lectura[14];
+        let { v: quimic1}= lectura[15];
+        let { v: quimic2}= lectura[16];
+        let { v: numbatch}= lectura[17];
+        let { v: numorden}= lectura[18];
+        
 
         let sPA4 = setP4 + setP5;
         let sPA3 = sPA4 + setP3;
@@ -178,15 +162,15 @@ async function triggerGet() {
         let metasABS = [setP5, setP4, setP3, setP2, setP1];
         let metas = [setP5, sPA4, sPA3, sPA2, sPA1];
         let reales = [realS5, realS4, realS3, realS2, realS1, ];
-        let extrasSP = [quimic1, quimic2, tp2SP, tp4SP];
-        let extrasReal = [quimic1, quimic2, tp2Real, tp4Real];
+        let extrasSP= [quimic1,quimic2,tp2SP,tp4SP];
+        let extrasReal= [quimic1,quimic2,tp2Real,tp4Real];
 
-        if (numbatch != bufferbatch) {
-            temnumbatch = numbatch;
-            bufferbatch = numbatch;
+        if(numbatch != bufferbatch){
+            temnumbatch=numbatch;
+            bufferbatch=numbatch;
         }
-
-        //console.log(reales);
+       
+//console.log(reales);
 
 
         if (real >= metas[counter] && (counter == 0 || counter > last)) {
@@ -207,7 +191,7 @@ async function triggerGet() {
 
             if (metasABS[counter] >= 0) {
 
-
+                
                 const salvarreg = axios.post(salvaconsURL, newreg);
 
                 console.log(`Peso setpoint ${ metas[counter]}`);
@@ -226,8 +210,8 @@ async function triggerGet() {
         }
         if (counter > 4) {
             counter = 4;
-            temnumbatch = temnumbatch + 1;
-
+            temnumbatch=temnumbatch+1;             
+            
         }
 
     } catch (error) {

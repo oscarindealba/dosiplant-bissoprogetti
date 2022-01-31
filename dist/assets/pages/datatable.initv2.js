@@ -1,52 +1,25 @@
 const API_USERS = "http://localhost:8081/api/consumos/";
 const xhr = new XMLHttpRequest();
+var doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "portrait" });
+
 
 
 
 function onRequestHandler() {
-    var tabledata3 = [
-        { id: 1, aditivo: "Carga AQ", peso: 12, },
-        { id: 2, aditivo: "Carga Quimica 2", peso: 1 },
-
-    ];
-
-
-    var table = new Tabulator("#datatable-1", {
-        data: tabledata3, //load row data from array
-        layout: "fitColumns", //fit columns to width of table
-        responsiveLayout: "collapse", //hide columns that dont fit on the table
-        tooltips: true, //show tool tips on cells
-        addRowPos: "top", //when adding a new row, add it to the top of the table
-        history: true, //allow undo and redo actions on the table
-        //paginate the data
-        paginationSize: 10, //allow 7 rows per page of data
-        movableColumns: true, //allow column order to be changed
-        resizableRows: true, //allow row order to be changed
-        initialSort: [ //set the initial sort order of the data
-            { column: "name", dir: "asc" },
-        ],
-        columns: [ //define the table columns
-            { title: "Aditivo", field: "aditivo", width: 250 },
-            { title: "Peso", field: "peso", editor: "input" }
-
-
-        ],
-    });
-
-
-
+    let datTabl2 = [];
+        let datTabl1 = [];
 
     if (this.readyState === 4 && this.status === 200) {
 
         const datosTabla = JSON.parse(this.response);
-        const datTabl2 = datosTabla[0];
-        const datTabl1 = datosTabla[1];
+        datTabl2 = datosTabla[0];
+        datTabl1 = datosTabla[1];
         console.log(datTabl2);
 
 
         var table = new Tabulator("#datatable-3", {
             layout: "fitDataFill",
-            height: "550px",
+            height: "650px",
             pagination: "local",
             paginationSize: 12,
             addRowPos: "top",
@@ -60,7 +33,7 @@ function onRequestHandler() {
             columns: [
                 // { title: "ID", field: "id", sorter: "number", headerMenu: headerMenu }, //add menu to this column header
                 { title: "Marca de tiempo", field: "createdAt", headerMenu: headerMenu },
-                { title: "Numero de batch", field: "numbatch", hozAlign: "center", headerMenu: headerMenu },
+                { title: "Numero de batch", field: "id", hozAlign: "center", headerMenu: headerMenu },
                 { title: "Formula", field: "formula", hozAlign: "center", headerMenu: headerMenu },
                 { title: "Numero de silo", field: "numsilo", hozAlign: "center", headerMenu: headerMenu },
                 { title: "Tipo", field: "gruposilo", hozAlign: "center", headerMenu: headerMenu },
@@ -73,7 +46,7 @@ function onRequestHandler() {
 
         var table2 = new Tabulator("#datatable-2", {
             layout: "fitColumns",
-            height: "287px",
+            height: "387px",
             responsiveLayout: "collapse",
             autoColumns: false,
             data: datTabl2,
@@ -81,7 +54,6 @@ function onRequestHandler() {
                 { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: true },
                 { title: "Numero de  Silo", field: "silo", width: 150, hozAlign: "center", },
                 { title: "Consumo real en Kg", field: "consumo", hozAlign: "center", sorter: "number", width: 150 },
-
 
             ],
 
@@ -104,7 +76,6 @@ function onRequestHandler() {
             columns: [
                 // { title: "ID", field: "id", sorter: "number", headerMenu: headerMenu }, //add menu to this column header
                 { title: "Marca de tiempo", field: "createdAt", headerMenu: headerMenu },
-                { title: "Numero de batch", field: "numbatch", hozAlign: "center", headerMenu: headerMenu },
                 // { title: "Formula", field: "formula", hozAlign: "center", headerMenu: headerMenu },
                 { title: "Numero de silo", field: "numsilo", hozAlign: "center", headerMenu: headerMenu },
                 { title: "Set Point", field: "setpoint", hozAlign: "center", headerMenu: headerMenu },
@@ -122,32 +93,85 @@ function onRequestHandler() {
         table.download("xlsx", "data.xlsx", { sheetName: "Reporte" });
     });
 
+    function createHeaders(keys) {
+        var result = [];
+        for (var i = 0; i < keys.length; i += 1) {
+          result.push({
+            id: keys[i],
+            name: keys[i],
+            prompt: keys[i],
+            width: 12,
+            align: "center",
+            padding: 0
+          });
+        }
+        return result;
+      }
+
+      
     document.getElementById("download-pdf").addEventListener("click", function() {
-        const urlBtn = document.documentURI;
 
-
-        if (urlBtn === "http://localhost:8081/realvssp") {
-            console.log(urlBtn);
-            table3.download("pdf", "realvsSP.pdf", {
-                orientation: "portrait",
-                title: "Reporte de Real Vs SetPoint",
-            });
+        // table.download("pdf", "realvsSP.pdf", {
+        //     orientation: "portrait",
+        //     title: "Reporte de Real Vs SetPoint",
+        // });
+        var elementHTML = $('#datable-3').html();
+var specialElementHandlers = {
+    '#elementH': function (element, renderer) {
+        return true;
+    }
+};
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        var headers = createHeaders([
+            "createdAt",
+            "id",
+            "formula",
+            "numsilo",
+            "gruposilo",
+            "setpoint"
+          ]);
+       
+        if (dd < 10) {
+            dd = '0' + dd;
         }
 
-        if (urlBtn === "http://localhost:8081/produccion") {
-            console.log(urlBtn);
-            table.download("pdf", "repProd.pdf", {
-                orientation: "portrait",
-                title: "Reporte de producción",
-                format: 'letter',
-            });
+        if (mm < 10) {
+            mm = '0' + mm;
         }
 
+        today = dd + '/' + mm + '/' + yyyy;
+
+        doc.text("Reporte de producción", 10, 20, {
+            horizontalScale: 9,
+            baseline: 'bottom'
+        });
+        doc.setFont("verdana", "normal");
+        doc.setFontSize(11);
+        doc.setTextColor(0, 0, 255);
+        doc.text(`${today}`, 160, 20);
+        doc.line(10, 22, 195, 22);     
+        doc.fromHTML(elementHTML, 15, 27, {
+            'width': 170,
+            'elementHandlers': specialElementHandlers
+        });
+        
+        setTimeout(function () {
+            doc.save("save.pdf");
+        }, 10); 
+        
 
     });
 
 
-
+    // document.getElementById("download-pdf").addEventListener("click", function() {
+    //     table.download("pdf", "data.pdf", {
+    //         orientation: "portrait",
+    //         title: "Reporte de producción Kg",
+    //     });
+    // });
 
 }
 

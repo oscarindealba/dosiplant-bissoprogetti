@@ -1,70 +1,93 @@
- <!-- leftbar-tab-menu -->
-    <div class="leftbar-tab-menu">
-        <div class="main-icon-menu">
-            <a href="/" class="logo logo-metrica d-block text-center">
-                <span>
-                    <img src="assets/images/003J PERDURA LOGO.svg" alt="logo-small" class="logo-sm">
-                </span>
-            </a>
-            <div class="main-icon-menu-body">
-                <div class="position-reletive h-100"  style="overflow-x: hidden;">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Inicio" data-bs-trigger="hover" >
-                            <a href="/" class="item-box">
-                                <span>
-                                    <img src="assets/images/inicio-icon.png" alt="logo-small" class="menu-icon">
-                                </span>
-                            </a><!--end nav-link-->
-                        </li><!--end nav-item-->
-                        <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Producción" data-bs-trigger="hover">
-                            <a href="/produccion"  class="item-box">
-                                <span>
-                                    <img src="assets/images/produccion-icon.png" alt="logo-small" class="menu-icon">
-                                </span>
-                            </a><!--end nav-link-->
-                        </li><!--end nav-item-->
+<!-- leftbar-tab-menu -->
+<div class="leftbar-tab-menu">
+    <div class="main-icon-menu">
+        <a href="/" class="logo logo-metrica d-block text-center">
+            <span>
+                <img src="assets/images/003J PERDURA LOGO.svg" alt="logo-small" class="logo-sm" id="perdura">
+            </span>
+        </a>
+        <div class="main-icon-menu-body">
+            <div class="position-reletive h-100" style="overflow-x: hidden;">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Inicio"
+                        data-bs-trigger="hover">
+                        <a href="/" class="item-box">
+                            <span>
+                                <img src="assets/images/inicio-icon.png" alt="logo-small" class="menu-icon">
+                            </span>
+                        </a>
+                        <!--end nav-link-->
+                    </li>
+                    <!--end nav-item-->
+                    <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Producción"
+                        data-bs-trigger="hover">
+                        <a href="/produccion" class="item-box">
+                            <span>
+                                <img src="assets/images/produccion-icon.png" alt="logo-small" class="menu-icon">
+                            </span>
+                        </a>
+                        <!--end nav-link-->
+                    </li>
+                    <!--end nav-item-->
 
-                        <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Real Vs SetPoint" data-bs-trigger="hover">
-                            <a href="operacion"  class="item-box">
-                                <span>
-                                    <img src="assets/images/real-icon.png" alt="logo-small" class="menu-icon mfp-fade">
-                                </span>
-                            </a><!--end nav-link-->
-                        </li><!--end nav-item-->
+                    <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Real Vs SetPoint"
+                        data-bs-trigger="hover">
+                        <a href="realvssp" class="item-box">
+                            <span>
+                                <img src="assets/images/real-icon.png" alt="logo-small" class="menu-icon mfp-fade">
+                            </span>
+                        </a>
+                        <!--end nav-link-->
+                    </li>
+                    <!--end nav-item-->
 
-                        <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Operación" data-bs-trigger="hover">
-                            <a href="#MetricaPages"  class="item-box">
-                                <span>
-                                    <img src="assets/images/operacion-icon.png" alt="logo-small" class="menu-icon">
-                                </span>
-                            </a><!--end nav-link-->
-                        </li><!--end nav-item-->
+                    <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Operación"
+                        data-bs-trigger="hover">
+                        <a href="operacion" class="item-box">
+                            <span>
+                                <img src="assets/images/operacion-icon.png" alt="logo-small" class="menu-icon">
+                            </span>
+                        </a>
+                        <!--end nav-link-->
+                    </li>
+                    <!--end nav-item-->
 
-                        <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Formúlas" data-bs-trigger="hover">
-                            <a href="#MetricaAuthentication" class="item-box">
-                               <span>
-                                    <img src="assets/images/formulas-icon.png" alt="logo-small" class="item-container mfp-fade">
-                                </span>
-                            </a><!--end nav-link-->
-                        </li><!--end nav-item-->
-                        <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Authentication" data-bs-trigger="hover">
-                            <a href="#MetricaAuthentication" class="item-box">
-                               <span>
-                                    <img src="assets/images/historico-icon.png" alt="logo-small" class="menu-icon">
-                                </span>
-                            </a><!--end nav-link-->
-                        </li><!--end nav-item-->
-                    </ul><!--end nav-->
-                </div><!--end /div-->
-            </div><!--end main-icon-menu-body-->
-            <div class="nf-item">
-                <a href="" class="item-box">
-                    <img src="assets/images/client-icon.png" alt="profile-user" class="menu-icon">
-                </a>
-            </div><!--end pro-metrica-end-->
+                    <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Reportes"
+                        data-bs-trigger="hover">
+                        <a href="reportes" class="item-box">
+                            <span>
+                                <img src="assets/images/formulas-icon.png" alt="logo-small"
+                                    class="item-container mfp-fade">
+                            </span>
+                        </a>
+                        <!--end nav-link-->
+                    </li>
+                    <!--end nav-item-->
+                    <li class="nf-item" data-bs-toggle="tooltip" data-bs-placement="right" title="Authentication"
+                        data-bs-trigger="hover">
+                        <a href="bodyrep_1" class="item-box">
+                            <span>
+                                <img src="assets/images/historico-icon.png" alt="logo-small" class="menu-icon">
+                            </span>
+                        </a>
+                        <!--end nav-link-->
+                    </li>
+                    <!--end nav-item-->
+                </ul>
+                <!--end nav-->
+            </div>
+            <!--end /div-->
         </div>
-        <!--end main-icon-menu-->
-
-       
+        <!--end main-icon-menu-body-->
+        <div class="nf-item">
+            <a href="" class="item-box">
+                <img src="assets/images/client-icon.png" alt="profile-user" class="menu-icon">
+            </a>
+        </div>
+        <!--end pro-metrica-end-->
     </div>
-    <!-- end leftbar-tab-menu-->
+    <!--end main-icon-menu-->
+
+
+</div>
+<!-- end leftbar-tab-menu-->

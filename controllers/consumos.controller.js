@@ -7,7 +7,13 @@ const { Op, Sequelize } = require("sequelize");
 
 
 const consumoGet = async(req, res = response) => {
-    const consumos = await Consumo.findAll();
+    const consumos = await Consumo.findAll({
+        where: {
+            setpoint: {
+                [Op.notBetween]: [0, 0]
+            }
+        }
+    });
 
     const resSum = await Consumo.findAll({
         attributes: [
@@ -17,11 +23,9 @@ const consumoGet = async(req, res = response) => {
         group: ['Consumo.numsilo'],
         raw: true
     });
-
     res.json([resSum, consumos]);
-
-    //res.json(consumos)
 };
+
 
 
 const registraConsumo = async(req, res = response) => {

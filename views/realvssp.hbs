@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
   {{>header}}
 
-    <body data-layout="horizontal-tab">
-       <div id="wrapper">
-            {{>topbar}}
+<body id="body">
+     {{>sidebar}}
+     {{>top_bar}}
+    <div class="page-wrapper">
+        <!-- Page Content-->
+        <div class="page-content-tab">
+           {{>contenido_3}}          
+           {{>set_appearance}}          
+           {{>footer}}
+        <!-- Fin de Page Content-->  
+        </div>  
+        <!--Fin de Page Wrapper-->    
+    </div>
+    <!-- Javascript  -->
 
-            {{>3_realvs_partial}}    
+    {{>scripts_}}
+    <!-- App js -->
+    <script src="assets/js/app.js"></script>
 
-            {{>footer}}
-      </div>
-     {{>scripts_}}
-    </body>
-
+</body>
+<!--end body-->
 </html>
