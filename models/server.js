@@ -190,16 +190,30 @@ async function triggerGet() {
 
 
         if (real >= metas[counter] && (counter == 0 || counter > last)) {
-            last = counter;
 
+
+            last = counter;
+            var hoy = new Date();
+            var hora = hoy.getHours();
+            var setTurno = 0;
+
+            if (hora >= 6 && hora <= 13) {
+                setTurno = 1;
+            };
+            if (hora >= 14 && hora <= 21) {
+                setTurno = 2;
+            };
+            if ((hora >= 22 && hora <= 23) || (hora >= 0 && hora <= 5)) {
+                setTurno = 3;
+            };
             const newreg = {
                 "numsilo": 5 - counter,
                 "gruposilo": "Silos",
                 "formula": nomreceta,
                 "setpoint": metasABS[counter],
                 "real": reales[counter],
-                "iduser": 2,
-                "turno": 1,
+                "iduser": 1,
+                "turno": setTurno,
                 "numbatch": temnumbatch,
                 "numorden": numorden
 

@@ -14,7 +14,7 @@ function onRequestHandler() {
 
         var table = new Tabulator("#datatable-3", {
             layout: "fitDataFill",
-            height: "2680px",
+            height: "580px",
 
             //pagination: "local",
             paginationSize: 120,
@@ -88,13 +88,13 @@ function onRequestHandler() {
 };
 
 
+
 const crearTablaHTML = () => {
     var tablaReporte1 = document.querySelector('.tabla-1');
     var tblBody = document.createElement("tbody");
     tablaReporte1.appendChild(tblBody);
-
     const valEncabezado = `
-    <thead>
+    
                                     <tr>                                        
                                         <th scope="col">Marca de tiempo</th>
                                         <th scope="col">Formula</th>
@@ -112,25 +112,21 @@ const crearTablaHTML = () => {
                                         <th scope="col">TP 4</th>
                                         <th scope="col">Total B</th>
                                     </tr>
-                                </thead>
+                              
                                 `;
-
-
     const encabezado = document.createElement('thead');
 
     encabezado.innerHTML = valEncabezado;
     tablaReporte1.append(encabezado);
-    var a = document.createAttribute("Estilo");
+    asindIDEnc = document.querySelector('thead');
+    asindIDEnc.setAttribute('id', 'EstiloEnc');
+
 
     for (i = 0; i <= datTabla.length; i++) {
-        totalProd = totalProd + datTabla[i].TotalBatch;
-
-
         const valRenglones = `
         
-        <tr>
-         
-            <th scope="row">${datTabla[i].createdAt}</td>
+                 
+            <td>${datTabla[i].createdAt}</td>
             <td>${datTabla[i].formula}</td>
             <td>${datTabla[i].numbatch}</td>
             <td>${datTabla[i].Silo_1}</td>
@@ -144,35 +140,72 @@ const crearTablaHTML = () => {
             <td>${datTabla[i].Carga_quimica_AQ}</td>
             <td>${datTabla[i].TP_2}</td>
             <td>${datTabla[i].TP_4}</td>
-            <td>${datTabla[i].TotalBatch}</td>
-
-        </tr>
-        
-        
+            <td>${datTabla[i].TotalBatch}</td>             
 `;
         const renglon = document.createElement('tr');
-
         if (i % 2 == 0) {
-            renglon.classList.add("table-primary");
-
-
+            renglon.classList.add('table-primary');
+        } else {
+            renglon.classList.add('table-success');
         };
-        document.getElementsByTagName('table')[0].setAttribute('id', 'Estilo');
-
         renglon.innerHTML = valRenglones;
-        tablaReporte1.append(renglon);
         tblBody.appendChild(renglon);
-    }
-    return div;
+        var asingEstilo1 = document.querySelectorAll('.table-primary');
+        var asingEstilo2 = document.querySelectorAll('.table-success');
+        for (j = 0; j < asingEstilo1.length; j++) {
+            asingEstilo1[j].setAttribute('id', 'Estilo');
+        };
+
+        for (k = 0; k < asingEstilo2.length; k++) {
+            asingEstilo2[k].setAttribute('id', 'Estilo2');
+        };
+    };
+
+
+    return tablaReporte1;
 
 };
 
-const getTotalProd = () => {
 
-    return totalProd;
-    s
+const getTotalProd = () => {
+    let totalProd = 0;
+    for (i = 0; i <= datTabla.length - 1; i++) {
+        totalProd = totalProd + datTabla[i].TotalBatch;
+    }
+    totalProd = totalProd / 1000;
+    var refTotalP = document.querySelector('.prodTotal');
+    var parrafo = document.createElement("p");
+    parrafo.classList.add('text-success');
+    var valpProdT = `${totalProd} Ton`;
+    parrafo.innerHTML = valpProdT;
+    refTotalP.appendChild(parrafo);
+    return refTotalP;
 
 }
+
+const dispalert = () => {
+    var hoy = new Date();
+    var hora = hoy.getHours();
+
+    if (hora >= 6 && hora <= 13) {
+        alert('Turno de la mañana');
+    };
+    if (hora >= 14 && hora <= 21) {
+        alert('Turno de la tarde');
+    };
+    if ((hora >= 22 && hora <= 23) || (hora >= 0 && hora <= 5)) {
+        alert('Turno de la turno de la noche');
+    };
+};
+
+
+const filtroFecha = () => {
+
+};
+
+document.getElementById("filtro_fecha").addEventListener("change", function() {
+    alert('en linea');
+});
 
 const datos = xhr.addEventListener("load", onRequestHandler);
 xhr.open("GET", API_USERS);

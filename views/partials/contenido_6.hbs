@@ -1,7 +1,19 @@
 <style media="print">
     #Estilo {
         font-size: 7px;
-        background-color: cadetblue;
+        color: darkblue;
+    }
+
+    #Estilo2 {
+        font-size: 7px;
+        color: darkslategray;
+    }
+
+    #EstiloEnc {
+        font-weight: bold;
+        font-size: 9px;
+
+
     }
 </style>
 <div class="row">
@@ -23,7 +35,7 @@
                                 <div class="ps-3">
                                     <i class="mdi mdi-account-star-outline "></i>
                                     <p class="text-muted mb-0">Supervisor de turno:</p>
-                                    <p class="text-muted mb-0">{{userlogin}}</p>
+                                    <p class="text-success mb-0">{{userlogin}}</p>
 
                                 </div>
                             </li>
@@ -35,16 +47,15 @@
                                 </div>
                             </li>
                             <li class="list-inline-item">
-                                <div class="ps-3">
+                                <div class="ps-3 prodTotal">
                                     <i class="mdi mdi-chart-bell-curve"></i>
                                     <p class="text-muted mb-0">Productción Total,</p>
-                                    <p class="text-muted mb-0">
-                                        <script>
+                                    <script>
+                                        $(document).ready(function () {
+                                            getTotalProd();
+                                        });
+                                    </script>
 
-                                            `${getTotalProd()}  Kg`
-
-                                        </script>
-                                    </p>
                                 </div>
                             </li>
                         </ul>
@@ -70,8 +81,9 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card-body">
-                            <div class="table-responsive-sm">
-                                <table class="table mb-0 tabla-1">
+                            <div class="table-responsive-sm ">
+                                <table class="table mb-0 tabla-1"
+                                    style="border-spacing: 1px;border-collapse: separate;">
                                     <script>
                                         $(document).ready(function () {
                                             crearTablaHTML();
@@ -93,8 +105,8 @@
 
                 <div class="row">
                     <div class="col-lg-6">
-                        <h5 class="mt-4">Esta información es privada :</h5>
-                        <ul class="ps-3">
+                        <h5 class="mt-4">Esta información es confidencial</h5>
+                        {{!-- <ul class="ps-3">
                             <li><small class="font-12">All accounts are to be paid within 7 days from
                                     receipt of invoice. </small></li>
                             <li><small class="font-12">To be paid by cheque or credit card or direct
@@ -104,14 +116,14 @@
                                     details supplied as confirmation of work undertaken will be charged
                                     the
                                     agreed quoted fee noted above.</small></li>
-                        </ul>
+                        </ul> --}}
                     </div>
                     <!--end col-->
                     <div class="col-lg-6 align-self-center">
                         <div class="float-none float-md-end" style="width: 30%;">
                             <small>Powered by</small>
                             <img src="assets/images/logo-1B.png" alt="" class="mt-2 mb-1" height="20">
-                            <p class="border-top">Mars</p>
+                            {{!-- <p class="border-top">Mars</p> --}}
                         </div>
                     </div>
                     <!--end col-->
@@ -120,12 +132,37 @@
                 <hr>
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12 col-xl-4 ms-auto align-self-center">
-                        <div class="text-center"><small class="font-12">Dosiplant V4</small></div>
+                        <div class="text-center"><small class="font-12"></small></div>
                     </div>
                     <!--end col-->
                     <div class="col-lg-12 col-xl-4">
+                        <label for="example-date-input" class="col-sm-2 col-form-label text-end">Fecha</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="date" value="javascript:dispalert()" id="filtro_fecha">
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12 col-xl-1">
                         <div class="float-end d-print-none mt-2 mt-md-0">
-                            <a href="javascript:window.print()" class="btn btn-de-info btn-sm">Imprimir</a>
+                            <a href="javascript:window.print()" class="btn btn-success btn-xl">Imprimir</a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-1">
+                        <div class="float-end d-print-none mt-2 mt-md-0">
+                            <a href="javascript:dispalert()" class="btn btn-outline-primary btn-xl">Turno 1</a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-1">
+                        <div class="float-end d-print-none mt-2 mt-md-0">
+                            <a href="javascript:dispalert()" class="btn btn-outline-primary btn-xl">Turno 2</a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12 col-xl-1">
+                        <div class="float-end d-print-none mt-2 mt-md-0">
+                            <a href="javascript:dispalert()" class="btn btn-outline-primary btn-xl">Turno 3</a>
 
                         </div>
                     </div>

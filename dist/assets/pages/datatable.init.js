@@ -27,7 +27,7 @@ function onRequestHandler() {
         ],
         columns: [ //define the table columns
             { title: "Aditivo", field: "aditivo", width: 250 },
-            { title: "Peso", field: "peso", editor: "input" }
+            { title: "Peso", field: "peso" }
 
 
         ],
@@ -41,7 +41,7 @@ function onRequestHandler() {
         const datosTabla = JSON.parse(this.response);
         const datTabl2 = datosTabla[0];
         const datTabl1 = datosTabla[1];
-        console.log(datTabl2);
+
 
 
         var table = new Tabulator("#datatable-3", {
@@ -80,7 +80,7 @@ function onRequestHandler() {
             columns: [
                 { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: true },
                 { title: "Numero de  Silo", field: "silo", width: 150, hozAlign: "center", },
-                { title: "Consumo real en Kg", field: "consumo", hozAlign: "center", sorter: "number", width: 150 },
+                { title: "Consumo real en Kg", field: "consumo", hozAlign: "center", sorter: "number", width: 250 },
 
 
             ],
@@ -114,37 +114,49 @@ function onRequestHandler() {
         });
 
 
-    }
+    };
+
+    var modulo = (() => {
+        const name = 'Hola Gustavo';
+
+        return {
+            greet() {
+                return name;
+            }
+        }
+    })();
+
+
 
 
     //funcion para generar datos en .xlsx
-    document.getElementById("download-xlsx").addEventListener("click", function() {
-        table.download("xlsx", "data.xlsx", { sheetName: "Reporte" });
-    });
+    // document.getElementById("download-xlsx").addEventListener("click", function() {
+    //     table.download("xlsx", "data.xlsx", { sheetName: "Reporte" });
+    // });
 
-    document.getElementById("download-pdf").addEventListener("click", function() {
-        const urlBtn = document.documentURI;
-
-
-        if (urlBtn === "http://localhost:8081/realvssp") {
-            console.log(urlBtn);
-            table3.download("pdf", "realvsSP.pdf", {
-                orientation: "portrait",
-                title: "Reporte de Real Vs SetPoint",
-            });
-        }
-
-        if (urlBtn === "http://localhost:8081/produccion") {
-            console.log(urlBtn);
-            table.download("pdf", "repProd.pdf", {
-                orientation: "portrait",
-                title: "Reporte de producción",
-                format: 'letter',
-            });
-        }
+    // document.getElementById("download-pdf").addEventListener("click", function() {
+    //     const urlBtn = document.documentURI;
 
 
-    });
+    //     if (urlBtn === "http://localhost:8081/realvssp") {
+    //         console.log(urlBtn);
+    //         table3.download("pdf", "realvsSP.pdf", {
+    //             orientation: "portrait",
+    //             title: "Reporte de Real Vs SetPoint",
+    //         });
+    //     }
+
+    //     if (urlBtn === "http://localhost:8081/produccion") {
+    //         console.log(urlBtn);
+    //         table.download("pdf", "repProd.pdf", {
+    //             orientation: "portrait",
+    //             title: "Reporte de producción",
+    //             format: 'letter',
+    //         });
+    //     }
+
+
+    // });
 
 
 

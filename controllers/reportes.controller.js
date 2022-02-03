@@ -8,10 +8,13 @@ const reporte1Get = async(req, res = response) => {
     const reporte1 = await Reporte1.findAll();
     res.json({
         reporte1
+
     });
 
 
 };
+
+
 module.exports = {
     reporte1Get
 }
