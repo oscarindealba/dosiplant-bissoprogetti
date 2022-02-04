@@ -170,19 +170,34 @@ const getTotalProd = () => {
 
 };
 
-const dispalert = () => {
+const dispalert = (arg) => {
     var hoy = new Date();
     var hora = hoy.getHours();
+    var tab = document.querySelector('thead');
+    var cuerpo = document.querySelector('tbody');
+    if (tab) {
+        tab.remove();
+        cuerpo.remove();
+    }
+    fechaFiltro = document.getElementById("picker_date").value;
+    if (!fechaFiltro) {
+        executeExample('errorType');
+    } else {
 
-    if (hora >= 6 && hora <= 13) {
-        alert('Turno de la mañana');
+        axios.get(API_REPORTES, {
+            params: {
+                fechaFiltro: fechaFiltro,
+                selTurno: arg
+            }
+        }).then(res => {
+            //console.log(res.data.reporte1);
+            datTabla = res.data.reporte1;
+            crearTablaHTML();
+            getTotalProd();
+
+        });
     };
-    if (hora >= 14 && hora <= 21) {
-        alert('Turno de la tarde');
-    };
-    if ((hora >= 22 && hora <= 23) || (hora >= 0 && hora <= 5)) {
-        alert('Turno de la turno de la noche');
-    };
+
 };
 
 
@@ -204,31 +219,31 @@ const filtroFecha = () => {
 
 
 
-document.getElementById("picker_date").addEventListener('change', function() {
-    var tab = document.querySelector('thead');
-    var cuerpo = document.querySelector('tbody');
-    if (tab) {
-        tab.remove();
-        cuerpo.remove();
-    }
-    fechaFiltro = document.getElementById("picker_date").value;
-    //let date = new Date();
-    //let output = formatter.format(fechaFiltro);
+// document.getElementById("picker_date").addEventListener('change', function() {
+//     var tab = document.querySelector('thead');
+//     var cuerpo = document.querySelector('tbody');
+//     if (tab) {
+//         tab.remove();
+//         cuerpo.remove();
+//     }
+//     fechaFiltro = document.getElementById("picker_date").value;
+//     //let date = new Date();
+//     //let output = formatter.format(fechaFiltro);
 
 
-    axios.get(API_REPORTES, {
-        params: {
-            fechaFiltro: fechaFiltro
-        }
-    }).then(res => {
-        //console.log(res.data.reporte1);
-        datTabla = res.data.reporte1;
-        crearTablaHTML();
-        getTotalProd();
+//     axios.get(API_REPORTES, {
+//         params: {
+//             fechaFiltro: fechaFiltro
+//         }
+//     }).then(res => {
+//         //console.log(res.data.reporte1);
+//         datTabla = res.data.reporte1;
+//         crearTablaHTML();
+//         getTotalProd();
 
-    });
+//     });
 
-});
+// });
 
 //const datos = xhr.addEventListener("load", onRequestHandler);
 //xhr.open("GET", API_REPORTES);
