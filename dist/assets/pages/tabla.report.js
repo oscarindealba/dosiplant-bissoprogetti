@@ -1,9 +1,24 @@
-const API_USERS = "http://localhost:8081/api/reportes/";
 const xhr = new XMLHttpRequest();
 let datTabla = {};
 let totalProd = 0;
+const now = new Date();
 
 
+
+
+options = {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+    hour12: false,
+    timeZone: 'America/Mexico_City'
+};
+let formatter = new Intl.DateTimeFormat('es-Es', options);
+let ahora = formatter.format(now);
+const API_REPORTES = `http://localhost:8081/api/reportes/`;
 
 function onRequestHandler() {
 
@@ -48,8 +63,6 @@ function onRequestHandler() {
             data: datosTabla,
         });
 
-
-
     }
 
 
@@ -57,39 +70,13 @@ function onRequestHandler() {
 
 
 
-    //funcion para generar datos en .xlsx
-    // document.getElementById("download-xlsx").addEventListener("click", function() {
-    //     table.download("xlsx", "data.xlsx", { sheetName: "Reporte" });
-    // });
-
-    // document.getElementById("download-pdf").addEventListener("click", function() {
-    //     const urlBtn = document.documentURI;
 
 
-    //     if (urlBtn === "http://localhost:8081/realvssp") {
-    //         console.log(urlBtn);
-    //         table3.download("pdf", "realvsSP.pdf", {
-    //             orientation: "portrait",
-    //             title: "Reporte de Real Vs SetPoint",
-    //         });
-    //     }
 
-    //     if (urlBtn === "http://localhost:8081/produccion") {
-    //         console.log(urlBtn);
-    //         table.download("pdf", "repProd.pdf", {
-    //             orientation: "portrait",
-    //             title: "Reporte de producción",
-    //             format: 'letter',
-    //         });
-    //     }
-
-
-    // });
 };
 
-
-
 const crearTablaHTML = () => {
+
     var tablaReporte1 = document.querySelector('.tabla-1');
     var tblBody = document.createElement("tbody");
     tablaReporte1.appendChild(tblBody);
@@ -123,10 +110,11 @@ const crearTablaHTML = () => {
 
 
     for (i = 0; i <= datTabla.length; i++) {
+        let timestamp = Date.parse(datTabla[i].createdAt);
         const valRenglones = `
         
                  
-            <td>${datTabla[i].createdAt}</td>
+            <td>${formatter.format(timestamp)}</td>
             <td>${datTabla[i].formula}</td>
             <td>${datTabla[i].numbatch}</td>
             <td>${datTabla[i].Silo_1}</td>
@@ -166,7 +154,6 @@ const crearTablaHTML = () => {
 
 };
 
-
 const getTotalProd = () => {
     let totalProd = 0;
     for (i = 0; i <= datTabla.length - 1; i++) {
@@ -181,7 +168,7 @@ const getTotalProd = () => {
     refTotalP.appendChild(parrafo);
     return refTotalP;
 
-}
+};
 
 const dispalert = () => {
     var hoy = new Date();
@@ -200,16 +187,53 @@ const dispalert = () => {
 
 
 const filtroFecha = () => {
-
+    ('.picker_date').datepicker({ dateFormat: "yyyy-MM-dd" });
+    let date = new Date();
+    let output = String(date.getDate()).padStart(2, '0') + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getFullYear();
+    console.log(output);
+    return output;
 };
 
-document.getElementById("filtro_fecha").addEventListener("change", function() {
-    alert('en linea');
+//function actualizar() { location.reload(true); };
+
+// document.getElementById("picker_date").addEventListener('click', function() {
+//     var tablaReporte1 = document.querySelector('.tabla-1');
+//     tablaReporte1.parentNode.removeChild(tablaReporte1);
+//     return false;
+// });
+
+
+
+document.getElementById("picker_date").addEventListener('change', function() {
+    var tab = document.querySelector('thead');
+    var cuerpo = document.querySelector('tbody');
+    if (tab) {
+        tab.remove();
+        cuerpo.remove();
+    }
+    fechaFiltro = document.getElementById("picker_date").value;
+    //let date = new Date();
+    //let output = formatter.format(fechaFiltro);
+
+
+    axios.get(API_REPORTES, {
+        params: {
+            fechaFiltro: fechaFiltro
+        }
+    }).then(res => {
+        //console.log(res.data.reporte1);
+        datTabla = res.data.reporte1;
+        crearTablaHTML();
+        getTotalProd();
+
+    });
+
 });
 
-const datos = xhr.addEventListener("load", onRequestHandler);
-xhr.open("GET", API_USERS);
-xhr.send();
+//const datos = xhr.addEventListener("load", onRequestHandler);
+//xhr.open("GET", API_REPORTES);
+//xhr.send();
+
 
 
 var rowMenu = [{

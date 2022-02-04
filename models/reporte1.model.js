@@ -20,13 +20,13 @@ const Reporte1 = db.define("Reporte1", {
     },
 
     createdAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
 
     },
 
     updatedAt: {
-        type: DataTypes.DATE,
+        type: DataTypes.DATEONLY,
         allowNull: false,
 
     },
@@ -36,7 +36,7 @@ const Reporte1 = db.define("Reporte1", {
         allowNull: false
     },
 
-    
+
     Silo_1: {
         type: DataTypes.FLOAT,
         allowNull: false,
@@ -107,10 +107,15 @@ const Reporte1 = db.define("Reporte1", {
         type: DataTypes.FLOAT,
         allowNull: false,
         defaultValue: true
-    }
+    },
+    turno: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
 
-    
-    
+    },
+
+
+
 }, { db, DataTypes });
 
 

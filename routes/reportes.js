@@ -1,4 +1,3 @@
-
 const { Router } = require('express');
 
 const {
@@ -9,6 +8,6 @@ const {
 const router = Router();
 
 // RUTAS DE APIS
-router.get('/',reporte1Get);
+router.get('/', reporte1Get);
 
 module.exports = router;

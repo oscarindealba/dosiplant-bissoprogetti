@@ -6,6 +6,7 @@ const { Op, Sequelize } = require("sequelize");
 
 
 
+
 const consumoGet = async(req, res = response) => {
     const consumos = await Consumo.findAll({
         where: {
@@ -52,6 +53,10 @@ const sumaSilos = async(req, res = response) => {
 
 
 };
+
+
+
+
 
 
 module.exports = {
