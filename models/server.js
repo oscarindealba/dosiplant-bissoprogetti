@@ -21,7 +21,7 @@ let bufferbatch = 0;
 
 
 hbs.registerPartials(__dirname + '/../views/partials');
-setInterval(triggerGet, 500);
+//setInterval(triggerGet, 500);
 
 
 class Server {

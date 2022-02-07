@@ -1,39 +1,91 @@
 <div class="row">
-    <div class="col-xl-12 mx-auto">
+    <div class="col-xl-10 mx-auto">
         <div class="card">
             <div class="card-body invoice-head">
-
-
             </div>
             <!--end card-body-->
             <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-8">
-                        <div class="card-body">
+                {{!-- ----------------------------------PRIMER GRAFICA-------------}}
+                <div class="card-header">
+                    <h4 class="card-title">Consumo por silo</h4>
 
+                    <script>
+                        $(document).ready(function () {
+                            getAPIturnos();
+                            getAPIConsumos();
+                        });
+                    </script>
+
+                </div>
+                <div class="row">
+                    <div class="col-lx-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="table-responsive">
+                                        <div id="datatable-2"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div id="apex_pie2-1" class="apex-charts"></div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+
+                </div>
+                {{!-- ----------------------------------SEGUNDA GRAFICA-------------}}
+
+                <div class="card-header">
+                    <h4 class="card-title">Consumo de Aditivos</h4>
+                </div>
+                <div class="row">
+                    <div class="col-lx-4">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="table-responsive">
+                                        <div id="datatable-1"></div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div id="apex_pie2-2" class="apex-charts"></div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--end card-body-->
+                    </div>
+
+                </div>
+
+                {{!-- ----------------------------------TERCER GRAFICA----------- --}}
+                <div class="card-header">
+                    <h4 class="card-title">Consumo de Aditivos</h4>
+                </div>
+                <div class="row">
+                    <div class="col-lx-4">
+                        <div class="card-body">
+                            <div id="apex_column1" class="apex-charts"></div>
+                            <table class="table mb-0 tablprod" style="border-spacing: 1px;border-collapse: separate;">
+
+
+                            </table>
+                        </div>
+                        <!--end card-body-->
+                        <div class="card-body">
                             <div class="table-responsive">
-                                <div id="datatable-2"></div>
                             </div>
                         </div>
-                        <!--end card-body-->
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="card-body">
-                            <div class="card-header">
-                                <h4 class="card-title">Conusumo por silo</h4>
-                            </div>
-                            <div id="apex_pie2-1" class="apex-charts"></div>
-
-                        </div>
-                        <!--end card-body-->
                     </div>
 
                 </div>
+                {{!-- ----------------------------------FIN DE GRAFICA------------ --}}
 
-
-                <div class="row">
-
-                </div>
 
                 <hr>
                 <div class="row d-flex justify-content-center">

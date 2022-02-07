@@ -20,13 +20,14 @@ const Consumo = db.define("Consumo", {
     },
 
     setpoint: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(6, 1),
         allowNull: false,
         defaultValue: true
     },
 
+
     real: {
-        type: DataTypes.FLOAT,
+        type: DataTypes.FLOAT(6, 1),
         allowNull: false,
         defaultValue: true
     },
@@ -52,7 +53,7 @@ const Consumo = db.define("Consumo", {
         allowNull: false,
 
     },
-    
+
 }, { db, DataTypes });
 
 module.exports = Consumo;

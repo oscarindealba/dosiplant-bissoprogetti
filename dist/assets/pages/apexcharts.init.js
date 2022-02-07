@@ -1,3 +1,20 @@
+const API_CONSUMOSTURNO = `http://localhost:8081/api/consumos/turno/`;
+let datSilos, datAgregados, datQuimicos, datTurnos, consumos = {};
+
+const getAPIturnos = () => {
+    axios.get(API_CONSUMOSTURNO).then(res => {
+        datTurnos = res.data;
+        datSilos = datTurnos[0];
+        datAgregados = datTurnos[1];
+        datQuimicos = datTurnos[2];
+        resSum = datTurnos[3];
+
+        grafica1();
+        graficaConsumos();
+    });
+
+};
+
 var options = {
     series: [{
         name: "Desktops",
@@ -33,6 +50,7 @@ var options = {
     }
 };
 
+console.log(consumos);
 var chart = new ApexCharts(document.querySelector("#apex_line1"), options);
 chart.render();
 
@@ -113,86 +131,99 @@ chart.render();
 
 
 var options = {
-    chart: {
-        height: 360,
-        type: 'area',
-        stacked: true,
-        toolbar: {
-            show: false,
-            autoSelected: 'zoom'
+        chart: {
+            height: 360,
+            type: 'area',
+            stacked: true,
+            toolbar: {
+                show: false,
+                autoSelected: 'zoom'
+            },
         },
-    },
-    colors: ['#2a77f4', '#a5c2f1'],
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        curve: 'smooth',
-        width: [3, 3],
-        dashArray: [0, 4],
-        lineCap: 'round'
-    },
-    grid: {
-        borderColor: "#45404a2e",
-        padding: {
-            left: 0,
-            right: 0
+        colors: ['#2a77f4', '#a5c2f1', '#15c201'],
+        dataLabels: {
+            enabled: false
         },
-        strokeDashArray: 4,
-    },
-    markers: {
-        size: 0,
-        hover: {
-            size: 0
-        }
-    },
-    series: [{
-        name: 'New Visits',
-        data: [0, 60, 20, 90, 45, 110, 55, 130, 44, 110, 75, 120]
-    }, {
-        name: 'Unique Visits',
-        data: [0, 45, 10, 75, 35, 94, 40, 115, 30, 105, 65, 110]
-    }],
+        stroke: {
+            curve: 'smooth',
+            width: [3, 3, 3],
+            dashArray: [1, 0, 1],
+            lineCap: 'round'
+        },
+        grid: {
+            borderColor: "#45404a2e",
+            padding: {
+                left: 0,
+                right: 0
+            },
+            strokeDashArray: 4,
+        },
+        markers: {
+            size: 0,
+            hover: {
+                size: 0
+            }
+        },
+        series: [{
+            name: 'Máximo superior',
+            data: [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5]
+        }, {
+            name: 'Unique Visits',
+            data: [-5, -5, -5, -5, -5, -5, -5, -5, -5, -5, -5, -5]
+        }, {
+            name: 'Mínimo',
+            data: [0, 1, -1, 0, 2.5, -10.5, -5, -8, 5, 12.3, 9, -8]
+        }],
 
-    xaxis: {
-        type: 'month',
-        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-        axisBorder: {
-            show: true,
-            color: '#45404a2e',
+        xaxis: {
+            type: 'month',
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            axisBorder: {
+                show: true,
+                color: '#45404a2e',
+            },
+            axisTicks: {
+                show: true,
+                color: '#45404a2e',
+            },
         },
-        axisTicks: {
-            show: true,
-            color: '#45404a2e',
+        fill: {
+            type: "gradient",
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.4,
+                opacityTo: 0.3,
+                stops: [0, 90, 100]
+            }
         },
-    },
-    fill: {
-        type: "gradient",
-        gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.4,
-            opacityTo: 0.3,
-            stops: [0, 90, 100]
-        }
-    },
 
-    tooltip: {
-        x: {
-            format: 'dd/MM/yy HH:mm'
+        tooltip: {
+            x: {
+                format: 'dd/MM/yy HH:mm'
+            },
         },
-    },
-    legend: {
-        position: 'top',
-        horizontalAlign: 'right'
-    },
-}
-
+        legend: {
+            position: 'top',
+            horizontalAlign: 'right'
+        },
+    }
+    //-----------------------------------------DESVIACION SILO 1------------
 var chart = new ApexCharts(
-    document.querySelector("#apex_area1"),
+    document.querySelector("#desvsilo1"),
     options
 );
 
 chart.render();
+
+//-----------------------------------------DESVIACION SILO 2---------------
+var chart = new ApexCharts(
+    document.querySelector("#desvsilo2"),
+    options
+);
+
+chart.render();
+//--------------------------------------------------------------------------
+
 
 //Area-2
 document.addEventListener('DOMContentLoaded', function() {
@@ -620,89 +651,123 @@ document.addEventListener('DOMContentLoaded', function() {
 })
 
 //colunm-1
+const grafica1 = () => {
+    let silos = [0, 0, 0];
+    let agregados = [0, 0, 0];
+    let quimicos = [0, 0, 0];
 
-var options = {
-    chart: {
-        height: 396,
-        type: 'bar',
-        toolbar: {
-            show: false
-        },
-    },
-    plotOptions: {
-        bar: {
-            horizontal: false,
-            endingShape: 'rounded',
-            columnWidth: '55%',
-        },
-    },
-    dataLabels: {
-        enabled: false
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    colors: ["rgba(42, 118, 244, .18)", '#2a76f4', "rgba(251, 182, 36, .6)"],
-    series: [{
-        name: 'Net Profit',
-        data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-    }, {
-        name: 'Revenue',
-        data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
-    }, {
-        name: 'Free Cash Flow',
-        data: [35, 41, 36, 26, 45, 48, 52, 53, 41]
-    }],
-    xaxis: {
-        categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
-        axisBorder: {
-            show: true,
-            color: '#bec7e0',
-        },
-        axisTicks: {
-            show: true,
-            color: '#bec7e0',
-        },
-    },
-    legend: {
-        offsetY: 6,
-    },
-    yaxis: {
-        title: {
-            text: '$ (thousands)'
-        }
-    },
-    fill: {
-        opacity: 1
 
-    },
-    // legend: {
-    //     floating: true
-    // },
-    grid: {
-        row: {
-            colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
-            opacity: 0.2
+    if (datSilos.length < 3) {
+        for (i = 0; i < datSilos.length; i++) {
+            silos[datSilos[i].turno - 1] = datSilos[i].silos;
+        };
+    } else {
+        silos = [datSilos[0].silos, datSilos[1].silos, datSilos[2].silos];
+    };
+
+
+    if (datAgregados.length < 3) {
+        for (i = 0; i < datAgregados.length; i++) {
+            agregados[datAgregados[i].turno - 1] = datAgregados[i].agregados;
+        };
+    } else {
+        agregados = [datAgregados[0].agregados, datAgregados[1].agregados, datAgregados[2].agregados];
+    };
+
+
+    if (datQuimicos.length < 3) {
+        for (i = 0; i < datQuimicos.length; i++) {
+            quimicos[datQuimicos[i].turno - 1] = datQuimicos[i].quimicos;
+        };
+
+    } else {
+        quimicos = [datQuimicos[0].quimicos, datQuimicos[1].quimicos, datQuimicos[2].quimicos];
+    };
+
+
+    var options = {
+        chart: {
+            height: 396,
+            type: 'bar',
+            toolbar: {
+                show: false
+            },
         },
-        borderColor: '#f1f3fa'
-    },
-    tooltip: {
-        y: {
-            formatter: function(val) {
-                return "$ " + val + " thousands"
+        plotOptions: {
+            bar: {
+                horizontal: false,
+                endingShape: 'rounded',
+                columnWidth: '80%',
+            },
+        },
+        dataLabels: {
+            enabled: false
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        colors: ["rgba(42, 118, 244, .18)", '#2a76f4', "rgba(251, 182, 36, .6)"],
+        series: [{
+            name: 'Silos',
+            data: silos
+        }, {
+            name: 'Quimicos',
+            data: quimicos
+        }, {
+            name: 'Agregados',
+            data: agregados
+        }],
+        xaxis: {
+            categories: ['Turno 1', 'Turno 2', 'Turno 3'],
+            axisBorder: {
+                show: true,
+                color: '#bec7e0',
+            },
+            axisTicks: {
+                show: true,
+                color: '#bec7e0',
+            },
+        },
+        legend: {
+            offsetY: 6,
+        },
+        yaxis: {
+            title: {
+                text: 'Kg (Kilogramos)'
+            }
+        },
+        fill: {
+            opacity: 1
+
+        },
+        // legend: {
+        //     floating: true
+        // },
+        grid: {
+            row: {
+                colors: ['transparent', 'transparent'], // takes an array which will be repeated on columns
+                opacity: 0.2
+            },
+            borderColor: '#f1f3fa'
+        },
+        tooltip: {
+            y: {
+                formatter: function(val) {
+                    return "$ " + val + " thousands"
+                }
             }
         }
     }
-}
 
-var chart = new ApexCharts(
-    document.querySelector("#apex_column1"),
-    options
-);
+    var chart = new ApexCharts(
+        document.querySelector("#apex_column1"),
+        options
+    );
 
-chart.render();
+    chart.render();
+};
 
 //apex-column-2
 
@@ -1689,52 +1754,55 @@ var chart = new ApexCharts(
 chart.render();
 
 //apex-pie2
+const graficaConsumos = () => {
 
-var options = {
-    chart: {
-        height: 290,
-        type: 'donut',
-    },
-    stroke: {
-        show: true,
-        width: 2,
-        colors: ['transparent']
-    },
-    series: [50, 20, 25, 12, 54, 10, 82],
-    legend: {
-        show: true,
-        position: 'bottom',
-        horizontalAlign: 'center',
-        verticalAlign: 'middle',
-        floating: false,
-        fontSize: '14px',
-        offsetX: 0,
-        offsetY: 6
-    },
-    labels: ["Silo 1", "Silo 2", "Silo 3", "Silo 4", "Silo 5", "Silo 6", "Silo 7"],
-    colors: ["#d9e6fd", "#4a8af6", "#fbc659", "#11e6fd", "#4a8a06", "#fb265a", "#f8265a"],
-    responsive: [{
-        breakpoint: 650,
-        options: {
-            chart: {
-                height: 200
-            },
-            legend: {
-                show: false
-            },
+    var options = {
+        chart: {
+            height: 290,
+            type: 'donut',
+        },
+        stroke: {
+            show: true,
+            width: 2,
+            colors: ['transparent']
+        },
+        series: [resSum[0].consumo, resSum[1].consumo, resSum[2].consumo, resSum[3].consumo, resSum[4].consumo, 0, 0],
+        legend: {
+            show: true,
+            position: 'bottom',
+            horizontalAlign: 'center',
+            verticalAlign: 'middle',
+            floating: false,
+            fontSize: '14px',
+            offsetX: 0,
+            offsetY: 6
+        },
+        labels: ["Silo 1", "Silo 2", "Silo 3", "Silo 4", "Silo 5", "Silo 6", "Silo 7"],
+        colors: ["#d9e6fd", "#4a8af6", "#fbc659", "#11e6fd", "#4a8a06", "#fb265a", "#f8265a"],
+        responsive: [{
+            breakpoint: 650,
+            options: {
+                chart: {
+                    height: 200
+                },
+                legend: {
+                    show: false
+                },
+            }
+        }],
+        fill: {
+            type: 'gradient'
         }
-    }],
-    fill: {
-        type: 'gradient'
     }
+
+    var chart = new ApexCharts(
+        document.querySelector("#apex_pie2-1"),
+        options
+    );
+
+    chart.render();
+
 }
-
-var chart = new ApexCharts(
-    document.querySelector("#apex_pie2-1"),
-    options
-);
-
-chart.render();
 
 //apex-pie2
 
@@ -1748,7 +1816,7 @@ var options = {
         width: 2,
         colors: ['transparent']
     },
-    series: [50, 20, 25, 12, 54, 10, 82],
+    series: [50, 20],
     legend: {
         show: true,
         position: 'bottom',
@@ -1759,8 +1827,8 @@ var options = {
         offsetX: 0,
         offsetY: 6
     },
-    labels: ["Silo 1", "Silo 2", "Silo 3", "Silo 4", "Silo 5", "Silo 6", "Silo 7"],
-    colors: ["#d9e6fd", "#4a8af6", "#fbc659", "#11e6fd", "#4a8a06", "#fb265a", "#f8265a"],
+    labels: ["Carga Aq", "Carga Quimica 2"],
+    colors: ["#fb265a", "#11e6fd"],
     responsive: [{
         breakpoint: 650,
         options: {
@@ -1797,7 +1865,7 @@ var options = {
         width: 2,
         colors: ['transparent']
     },
-    series: [50, 20, 25, 12, 54, 10, 82],
+    series: [50, 20],
     legend: {
         show: true,
         position: 'bottom',
@@ -1808,8 +1876,8 @@ var options = {
         offsetX: 0,
         offsetY: 6
     },
-    labels: ["Silo 1", "Silo 2", "Silo 3", "Silo 4", "Silo 5", "Silo 6", "Silo 7"],
-    colors: ["#d9e6fd", "#4a8af6", "#fbc659", "#11e6fd", "#4a8a06", "#fb265a", "#f8265a"],
+    labels: ["Carga Aq", "Carga Quimica 2"],
+    colors: ["#d9e6fd", "#4a8af6"],
     responsive: [{
         breakpoint: 650,
         options: {

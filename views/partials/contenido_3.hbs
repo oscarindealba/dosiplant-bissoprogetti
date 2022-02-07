@@ -1,41 +1,93 @@
-<div class="container-fluid">   
-     <div class="col-sm-12" >
-            <div class="page-title-box">
-                            
-                <h4 class="page-title">Producción</h4>
+<div class="row">
+    <div class="col-xl-10 mx-auto">
+        <div class="card">
+            <div class="card-body invoice-head">
             </div>
-            <!--end page-title-box-->
-        </div> 
-        <div class="container-fluid">
-        <div class="row">
-                    <div class="col-md-8">
+            <!--end card-body-->
+            <div class="card-body">
+                {{!-- ----------------------------------PRIMER GRAFICA-------------}}
+
+
+                <script>
+                    $(document).ready(function () {
+                        getAPIRealsp();
+
+                    });
+                </script>
+
+
+                {{!-- ----------------------------------TERCER GRAFICA----------- --}}
+                <div class="card-header">
+                    <h4 class="card-title">Reporte de Real Vs SetPoint</h4>
+                </div>
+                <div class="row">
+                    <div class="col-lx-4">
+                        <div class="card-body">
+                            <div id="apex_column1" class="apex-charts"></div>
+                            <table class="table mb-0 tablealsp" style="border-spacing: 1px;border-collapse: separate;">
+
+                        </div>
+
+                        </table>
+                    </div>
+                    <!--end card-body-->
+                    <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Detalle de Real Vs SetPoint</h4>
-                                <p class="text-muted mb-0">
-                                </p>
-                            </div><!--end card-header-->
+                                <h4 class="card-title">Desviación en Silo 1</h4>
+                            </div>
+                            <!--end card-header-->
                             <div class="card-body">
-                                <div class="table-responsive">
-                                    <div class="mb-2">
-                                        <button class="btn btn-outline-primary btn-sm mb-1 mb-xl-0" id="download-xlsx">Descargar en Excel</button>
-                                        <button class="btn btn-outline-primary btn-sm mb-1 mb-xl-0" id="download-pdf">Descargar en  PDF</button>
-    
-                                    </div>
-                                    <div id="datatable-4"></div>
+                                <div class="chart-demo">
+                                    <div id="desvsilo1" class="apex-charts"></div>
                                 </div>
                             </div>
+                            <!--end card-body-->
                         </div>
-                    </div> <!-- end col --> 
+                        <!--end card-->
+                    </div>
 
-                    
-                     
+
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Desviación en Silo 2</h4>
+                            </div>
+                            <!--end card-header-->
+                            <div class="card-body">
+                                <div class="chart-demo">
+                                    <div id="desvsilo2" class="apex-charts"></div>
+                                </div>
+                            </div>
+                            <!--end card-body-->
+                        </div>
+                        <!--end card-->
+                    </div>
+                    <!--end col-->
+
+                </div>
+                {{!-- ----------------------------------FIN DE GRAFICA------------ --}}
+
+
+                <hr>
+                <div class="row d-flex justify-content-center">
+                    <div class="col-lg-12 col-xl-4 ms-auto align-self-center">
+                        <div class="text-center"><small class="font-12">Dsp V4</small></div>
+                    </div>
+                    <!--end col-->
+                    <div class="col-lg-12 col-xl-4">
+                        <div class="float-end d-print-none mt-2 mt-md-0">
+                            <a href="javascript:window.print()" class="btn btn-success btn-xl">Imprimir</a>
+
+                        </div>
+                    </div>
+                    <!--end col-->
+                </div>
+                <!--end row-->
+            </div>
+            <!--end card-body-->
         </div>
-        <div class="row">
-             <div class="col-lg-4">
-                        
-                    </div><!--end col-->
-        </div>
-        </div>
-        
+        <!--end card-->
+    </div>
+    <!--end col-->
 </div>
