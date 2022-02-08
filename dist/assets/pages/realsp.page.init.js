@@ -26,8 +26,7 @@ const creaTablaRealSP = () => {
         <th scope="col">Núm de silo</th>
         <th scope="col">SetPoint</th>
         <th scope="col">Peso real</th>
-        <th scope="col">Diferencia</th>
-        <th scope="col">Desviación (%)</th>
+        
     </tr>
 
 `;
@@ -50,8 +49,7 @@ const creaTablaRealSP = () => {
             <td>${datTabl1[i].numsilo}</td>
             <td>${datTabl1[i].setpoint}</td>
             <td>${datTabl1[i].real}</td>
-            <td>${datTabl1[i].diferencia}</td>
-            <td>${datTabl1[i].porcentaje}</td>
+            
                     
 `;
         const renglon = document.createElement('tr');
@@ -75,8 +73,8 @@ const creaTablaRealSP = () => {
     };
 
 };
-const getAPIRealsp = () => {
-
+const getAPIRealsp = (arg) => {
+    arg = 5;
     axios.get(API_CONSUMOS).then(res => {
         //console.log(res.data.reporte1);
         datTabla = res.data;

@@ -1,41 +1,81 @@
-<div class="container-fluid">   
-     <div class="col-sm-12" >
-            <div class="page-title-box">
-                            
-                <h4 class="page-title">Producción</h4>
+<div class="container-fluid">
+    <div class="col-sm-12">
+
+        <!--end page-title-box-->
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body invoice-head">
+                        <div class="row">
+                            <div class="col-md-4 align-self-center">
+                                <img src="assets/images/003J PERDURA LOGO.svg" alt="logo-small" class="logo-sm me-1"
+                                    height="24">
+
+                                <p class="card-title">Informe de producción por dia por turno</p>
+                            </div>
+                            <!--end col-->
+                            <div class="col-md-8">
+
+                                <ul class="list-inline mb-0 contact-detail float-end">
+                                    <li class="list-inline-item">
+                                        <div class="ps-3">
+                                            <i class="mdi mdi-account-star-outline "></i>
+                                            <p class="text-muted mb-0">Supervisor de turno:</p>
+                                            <p class="text-success mb-0">{{userlogin}}</p>
+
+                                        </div>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <div class="ps-3">
+                                            <i class="mdi mdi-clock"></i>
+                                            <p class="text-muted mb-0">Operador</p>
+                                            <p class="text-muted mb-0">Turno 1; Juan Perez</p>
+                                        </div>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <div class="ps-3 prodTotal">
+                                            <i class="mdi mdi-chart-bell-curve"></i>
+                                            <p class="text-muted mb-0">Productción Total,</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--end col-->
+                        </div>
+                    </div>
+                    <div class="card-header">
+                        <h4 class="card-title">Grafica de operación</h4>
+                        <script>
+                            $(document).ready(function () {
+                                getAPIOperacion();
+                            });
+                        </script>
+                    </div>
+                    <!--end card-header-->
+                    <div class="card-body">
+                        <div class="chart-demo">
+
+
+                            <div id="apex_area2" class="apex-charts"></div>
+                        </div>
+                    </div>
+                    <!--end card-body-->
+                </div>
+                <!--end card-->
             </div>
-            <!--end page-title-box-->
-        </div> 
-        <div class="container-fluid">
-        <div class="row">
-                    
-                        <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Grafica de operación</h4>
-                            </div><!--end card-header-->
-                          <div class="card-body">
-                                <div class="chart-demo">
-                                    <div class="toolbar">
-                                        <button class="btn btn-sm btn-outline-light" id="one_month">Turno 1</button>
-                                        <button class="btn btn-sm btn-outline-light" id="six_months">Turno 2</button>
-                                        <button class="btn btn-sm btn-outline-light active" id="one_year">Turno 3</button>
-                                        <button class="btn btn-sm btn-outline-light" id="ytd">YTD</button>
-                                        <button class="btn btn-sm btn-outline-light" id="all">Dia completo</button>
-                                    </div>
-                                    <div id="apex_area2" class="apex-charts"></div>
-                                </div>                                                                   
-                            </div><!--end card-body-->
-                        </div><!--end card-->
-                    </div><!--end col-->
-                    
-                     
+            <!--end col-->
+
+
         </div>
         <div class="row">
-             <div class="col-lg-4">
-                        
-                    </div><!--end col-->
+            <div class="col-lg-4">
+
+            </div>
+            <!--end col-->
         </div>
-        </div>
-        
+    </div>
+
 </div>
