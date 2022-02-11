@@ -1,9 +1,6 @@
-const xhr = new XMLHttpRequest();
-let datTabla = {};
-let totalProd = 0;
-const now = new Date();
-
-
+const API_REPORTES = `http://localhost:8081/api/reportes/`;
+let datTabl1, datTabl2, datTabla = {};
+let datSilos, datAgregados, datQuimicos, datTurnos, consumos = {};
 
 
 options = {
@@ -16,64 +13,54 @@ options = {
     hour12: false,
     timeZone: 'America/Mexico_City'
 };
-let formatter = new Intl.DateTimeFormat('es-Es', options);
-let ahora = formatter.format(now);
-const API_REPORTES = `http://localhost:8081/api/reportes/`;
-
-function onRequestHandler() {
-
-    if (this.readyState === 4 && this.status === 200) {
-        const numreg = 1000;
-        const { reporte1: datosTabla } = JSON.parse(this.response);
-        datTabla = datosTabla;
-
-        var table = new Tabulator("#datatable-3", {
-            layout: "fitDataFill",
-            height: "580px",
-
-            //pagination: "local",
-            paginationSize: 120,
-            addRowPos: "top",
-            responsiveLayout: "collapse",
-            autoColumns: false,
-            resizableRows: false,
-            initialSort: [
-                { column: "createdAt", dir: "desc" },
-            ],
-            rowContextMenu: rowMenu,
-            // columns: [
-            //     { formatter: "responsiveCollapse", width: 30, minWidth: 30, hozAlign: "center", resizable: false, headerSort: false },
-            //     { title: "Time", field: "createdAt", width: 150, headerMenu: headerMenu },
-            //     { title: "# de batch", field: "numbatch", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Formula", field: "formula", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 1", field: "Silo_1", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 2", field: "Silo_2", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 3", field: "Silo_3", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 4", field: "Silo_4", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 5", field: "Silo_5", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 6", field: "Silo_6", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Silo 7", field: "Silo_7", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Carga quimica AQ", field: "Carga_quimica_AQ", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Carga quimica 2", field: "Carga_quimica_2", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "TP_2", field: "TP_2", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "TP_4", field: "TP_4", hozAlign: "center", headerMenu: headerMenu },
-            //     { title: "Total bachada", field: "TotalBatch", hozAlign: "center", headerMenu: headerMenu },
-
-            // ],
-            data: datosTabla,
-        });
-
-    }
+const getAPIReport1 = (turnos, fechaFiltro) => {
 
 
+    axios.get(API_REPORTES, {
+        params: {
+            fechaFiltro: fechaFiltro,
+            turnos: turnos
+        }
+    }).then(res => {
+        //console.log(res.data.reporte1);
+        datTabla = res.data.reporte1;
+        console.log(datTabla);
+        crearTablaHTML();
+        getTotalProd();
 
-
-
-
-
+    });
 
 
 };
+
+
+let formatter = new Intl.DateTimeFormat('es-Es', options);
+let filtSelect = document.getElementById('multiSelect');
+filtSelect.addEventListener('change', function() {
+
+    const fechaFiltro = document.getElementById("picker_date_rep").value;
+
+    let turnos = [0, 0, 0];
+    if (filtSelect.options[0].selected) {
+        turnos[0] = 1;
+    };
+    if (filtSelect.options[1].selected) {
+        turnos[1] = 2;
+    };
+    if (filtSelect.options[2].selected) {
+        turnos[2] = 3;
+    };
+
+    var tab = document.querySelector('thead');
+    var cuerpo = document.querySelector('tbody');
+    if (tab) {
+        tab.remove();
+        cuerpo.remove();
+    }
+
+    getAPIReport1(turnos, fechaFiltro);
+});
+
 
 const crearTablaHTML = () => {
 
@@ -168,162 +155,4 @@ const getTotalProd = () => {
     refTotalP.appendChild(parrafo);
     return refTotalP;
 
-};
-
-const dispalert = (arg) => {
-    var hoy = new Date();
-    var hora = hoy.getHours();
-    var tab = document.querySelector('thead');
-    var cuerpo = document.querySelector('tbody');
-    if (tab) {
-        tab.remove();
-        cuerpo.remove();
-    }
-    fechaFiltro = document.getElementById("picker_date").value;
-    if (!fechaFiltro) {
-        executeExample('errorType');
-    } else {
-
-        axios.get(API_REPORTES, {
-            params: {
-                fechaFiltro: fechaFiltro,
-                selTurno: arg
-            }
-        }).then(res => {
-            //console.log(res.data.reporte1);
-            datTabla = res.data.reporte1;
-            crearTablaHTML();
-            getTotalProd();
-
-        });
-    };
-
-};
-
-
-const filtroFecha = () => {
-    ('.picker_date').datepicker({ dateFormat: "yyyy-MM-dd" });
-    let date = new Date();
-    let output = String(date.getDate()).padStart(2, '0') + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + date.getFullYear();
-    console.log(output);
-    return output;
-};
-
-//function actualizar() { location.reload(true); };
-
-// document.getElementById("picker_date").addEventListener('click', function() {
-//     var tablaReporte1 = document.querySelector('.tabla-1');
-//     tablaReporte1.parentNode.removeChild(tablaReporte1);
-//     return false;
-// });
-
-
-
-// document.getElementById("picker_date").addEventListener('change', function() {
-//     var tab = document.querySelector('thead');
-//     var cuerpo = document.querySelector('tbody');
-//     if (tab) {
-//         tab.remove();
-//         cuerpo.remove();
-//     }
-//     fechaFiltro = document.getElementById("picker_date").value;
-//     //let date = new Date();
-//     //let output = formatter.format(fechaFiltro);
-
-
-//     axios.get(API_REPORTES, {
-//         params: {
-//             fechaFiltro: fechaFiltro
-//         }
-//     }).then(res => {
-//         //console.log(res.data.reporte1);
-//         datTabla = res.data.reporte1;
-//         crearTablaHTML();
-//         getTotalProd();
-
-//     });
-
-// });
-
-//const datos = xhr.addEventListener("load", onRequestHandler);
-//xhr.open("GET", API_REPORTES);
-//xhr.send();
-
-
-
-var rowMenu = [{
-        label: "<i class='fas fa-user'></i> Change Name",
-        action: function(e, row) {
-            row.update({ name: "Steve Bobberson" });
-        }
-    },
-    {
-        label: "<i class='fas fa-check-square'></i> Select Row",
-        action: function(e, row) {
-            row.select();
-        }
-    },
-    {
-        separator: true,
-    },
-    {
-        label: "Admin Functions",
-        menu: [{
-                label: "<i class='fas fa-trash'></i> Delete Row",
-                action: function(e, row) {
-                    row.delete();
-                }
-            },
-            {
-                label: "<i class='fas fa-ban'></i> Disabled Option",
-                disabled: true,
-            },
-        ]
-    }
-]
-
-//define column header menu as column visibility toggle
-var headerMenu = function() {
-    var menu = [];
-    var columns = this.getColumns();
-
-    for (let column of columns) {
-
-        //create checkbox element using font awesome icons
-        let icon = document.createElement("i");
-        icon.classList.add("fas");
-        icon.classList.add(column.isVisible() ? "fa-check-square" : "fa-square");
-
-        //build label
-        let label = document.createElement("span");
-        let title = document.createElement("span");
-
-        title.textContent = " " + column.getDefinition().title;
-
-        label.appendChild(icon);
-        label.appendChild(title);
-
-        //create menu item
-        menu.push({
-            label: label,
-            action: function(e) {
-                //prevent menu closing
-                e.stopPropagation();
-
-                //toggle current column visibility
-                column.toggle();
-
-                //change menu item icon
-                if (column.isVisible()) {
-                    icon.classList.remove("fa-square");
-                    icon.classList.add("fa-check-square");
-                } else {
-                    icon.classList.remove("fa-check-square");
-                    icon.classList.add("fa-square");
-                }
-            }
-        });
-    }
-
-    return menu;
 };

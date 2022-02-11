@@ -33,6 +33,19 @@
                         <ul class="list-inline mb-0 contact-detail float-end">
                             <li class="list-inline-item">
                                 <div class="ps-3">
+                                    <p class="text-muted mb-0">Filtros:</p>
+                                    <input class="form-control " type="date" id="picker_date_rep" valueAsNumber="0">
+                                    <select id="multiSelect">
+
+                                        <option value="value-1" enabled selected>Turno 1</option>
+                                        <option value="value-2">Turno 2</option>
+                                        <option value="value-3">Turno 3</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="ps-3">
                                     <i class="mdi mdi-account-star-outline "></i>
                                     <p class="text-muted mb-0">Supervisor de turno:</p>
                                     <p class="text-success mb-0">{{userlogin}}</p>
@@ -129,37 +142,9 @@
                         <div class="text-center"><small class="font-12"></small></div>
                     </div>
                     <!--end col-->
-                    <div class="col-lg-12 col-xl-4">
-                        <label for="example-date-input" class="col-sm-2 col-form-label text-end">Fecha</label>
-                        <div class="col-sm-10">
-                            <input class="form-control " type="date" id="picker_date" valueAsNumber="0">
-                        </div>
-                    </div>
 
-                    <div class="col-lg-12 col-xl-1">
-                        <div class="float-end d-print-none mt-2 mt-md-0">
-                            <a href="javascript:window.print()" class="btn btn-success btn-xl">Imprimir</a>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-xl-1">
-                        <div class="float-end d-print-none mt-2 mt-md-0">
-                            <a href="javascript:dispalert(1)" class="btn btn-outline-primary btn-xl">Turno 1</a>
 
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-xl-1">
-                        <div class="float-end d-print-none mt-2 mt-md-0">
-                            <a href="javascript:dispalert(2)" class="btn btn-outline-primary btn-xl">Turno 2</a>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-12 col-xl-1">
-                        <div class="float-end d-print-none mt-2 mt-md-0">
-                            <a href="javascript:dispalert(3)" class="btn btn-outline-primary btn-xl">Turno 3</a>
-
-                        </div>
-                    </div>
                     <!--end col-->
                 </div>
                 <!--end row-->

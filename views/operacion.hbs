@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 
-  {{>header}}
+{{>header}}
 
 <body id="body">
-     {{>sidebar}}
-     {{>top_bar}}
-    <div class="page-wrapper">
-        <!-- Page Content-->
-        <div class="page-content-tab">
-           {{>contenido_4}}          
-           {{>set_appearance}}          
-           {{>footer}}
-        <!-- Fin de Page Content-->  
-        </div>  
-        <!--Fin de Page Wrapper-->    
+  {{>sidebar}}
+  {{>top_bar}}
+  <div class="page-wrapper">
+    <!-- Page Content-->
+    <div class="page-content-tab">
+      {{>contenido_4}}
+      {{>set_appearance}}
+      {{>footer}}
+      <!-- Fin de Page Content-->
     </div>
-    <!-- Javascript  -->
+    <!--Fin de Page Wrapper-->
+  </div>
+  <!-- Javascript  -->
 
-    {{>scripts_}}
-    <!-- App js -->
-    <script src="assets/js/app.js"></script>
+  {{>script.ope.init}}
+  <!-- App js -->
+  <script src="assets/js/app.js"></script>
 
 </body>
 <!--end body-->
+
 </html>

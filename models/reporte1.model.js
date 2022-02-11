@@ -20,7 +20,7 @@ const Reporte1 = db.define("Reporte1", {
     },
 
     createdAt: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
 
     },

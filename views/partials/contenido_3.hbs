@@ -15,6 +15,19 @@
                         <ul class="list-inline mb-0 contact-detail float-end">
                             <li class="list-inline-item">
                                 <div class="ps-3">
+                                    <p class="text-muted mb-0">Filtros:</p>
+                                    <input class="form-control " type="date" id="picker_date_real" valueAsNumber="0">
+                                    <select id="multiSelect">
+
+                                        <option value="value-1" enabled selected>Turno 1</option>
+                                        <option value="value-2">Turno 2</option>
+                                        <option value="value-3">Turno 3</option>
+                                    </select>
+
+                                </div>
+                            </li>
+                            <li class="list-inline-item">
+                                <div class="ps-3">
                                     <i class="mdi mdi-account-star-outline "></i>
                                     <p class="text-muted mb-0">Supervisor de turno:</p>
                                     <p class="text-success mb-0">{{userlogin}}</p>
@@ -44,28 +57,13 @@
                 {{!-- ----------------------------------PRIMER GRAFICA-------------}}
 
 
-                <script>
-                    $(document).ready(function () {
-                        getAPIRealsp();
-                        getAPIConsReal();
-                    });
-                </script>
+
 
 
                 {{!-- ----------------------------------TERCER GRAFICA----------- --}}
-                <div class="card-header">
-                    <h4 class="card-title">Tabla de eventos</h4>
-                </div>
+
                 <div class="row">
-                    <div class="col-lx-4">
-                        <div class="card-body">
-                            <div id="apex_column1" class="apex-charts"></div>
-                            <table class="table mb-0 tablealsp" style="border-spacing: 1px;border-collapse: separate;">
 
-                        </div>
-
-                        </table>
-                    </div>
                     <!--end card-body-->
                     <div class="col-lg-12">
                         <div class="card">
@@ -152,20 +150,25 @@
                     <!--end col-->
                 </div>
                 {{!-- ----------------------------------FIN DE GRAFICA------------ --}}
+                <div class="card-header">
+                    <h4 class="card-title">Tabla de eventos</h4>
+                </div>
+                <div class="col-lx-4">
+                    <div class="card-body">
+                        <div id="apex_column1" class="apex-charts"></div>
+                        <table class="table mb-0 tablealsp" style="border-spacing: 1px;border-collapse: separate;">
 
+                    </div>
 
+                    </table>
+                </div>
                 <hr>
                 <div class="row d-flex justify-content-center">
                     <div class="col-lg-12 col-xl-4 ms-auto align-self-center">
                         <div class="text-center"><small class="font-12">Dsp V4</small></div>
                     </div>
                     <!--end col-->
-                    <div class="col-lg-12 col-xl-4">
-                        <div class="float-end d-print-none mt-2 mt-md-0">
-                            <a href="javascript:window.print()" class="btn btn-success btn-xl">Imprimir</a>
 
-                        </div>
-                    </div>
                     <!--end col-->
                 </div>
                 <!--end row-->

@@ -1,8 +1,4 @@
 const API_CONSUMOS = "http://localhost:8081/api/consumos/";
-
-let datTabl1, datTabl2, datTabla = {};
-
-
 options = {
     year: 'numeric',
     month: 'numeric',
@@ -14,6 +10,38 @@ options = {
     timeZone: 'America/Mexico_City'
 };
 let formatter = new Intl.DateTimeFormat('es-Es', options);
+
+
+let datTabl1, datTabl2, datTabla = {};
+let filtSelect = document.getElementById('multiSelect');
+
+filtSelect.addEventListener('change', function() {
+
+    const fechaFiltro = document.getElementById("picker_date_real").value;
+    let turnos = [0, 0, 0];
+    if (filtSelect.options[0].selected) {
+        turnos[0] = 1;
+    };
+    if (filtSelect.options[1].selected) {
+        turnos[1] = 2;
+    };
+    if (filtSelect.options[2].selected) {
+        turnos[2] = 3;
+    };
+
+    var tab = document.querySelector('thead');
+    var cuerpo = document.querySelector('tbody');
+    if (tab) {
+        tab.remove();
+        cuerpo.remove();
+    }
+    //console.log(turnos);
+
+    getAPIConsumos(turnos, fechaFiltro);
+
+})
+
+
 
 //-----------------------FUNCIONES --------------------------------------
 const creaTablaRealSP = () => {
@@ -73,26 +101,28 @@ const creaTablaRealSP = () => {
     };
 
 };
-const getAPIRealsp = (arg) => {
-    arg = 5;
-    axios.get(API_CONSUMOS).then(res => {
-        //console.log(res.data.reporte1);
+const getAPIConsumos = (turnos, fechaFiltro) => {
+
+    axios.get(API_CONSUMOS, {
+        params: {
+            fechaFiltro: fechaFiltro,
+            turnos: turnos
+        }
+    }).then(res => {
         datTabla = res.data;
         datTabl2 = datTabla[0];
         datTabl1 = datTabla[1];
-        //console.log(datTabl1);
-        // creaTablaConsumo();
 
         //---------------------------CREACION DE TABLAS-------------
 
+        graficarDesv(datTabl1);
+        console.log(datTabl1);
         creaTablaRealSP();
-
         //console.log(datTabl2);
         //-------------------------FIN DE CREACION DE TABLAS--------
 
     });
 };
-
 
 
 
@@ -183,4 +213,117 @@ var headerMenu = function() {
     }
 
     return menu;
+};
+
+const graficarDesv = (arg) => {
+
+
+    let tolerancia = 30;
+    for (let j = 1; j <= 5; j++) {
+        let serieSilo1 = [];
+        let serieBatch1 = [];
+        let serieTolPos = [];
+        let serieTolNeg = [];
+        for (let k = 0; k <= arg.length - 1; k++) {
+            if (arg[k].numsilo === j) {
+
+                serieSilo1.push(arg[k].porcentaje.toFixed(1) - tolerancia);
+                serieBatch1.push(arg[k].numbatch);
+                serieTolPos.push(-1 * tolerancia);
+                serieTolNeg.push(2 * tolerancia);
+            };
+        };
+        console.log(serieSilo1);
+        var optionsSilo1 = {
+            chart: {
+                height: 360,
+                type: 'area',
+                stacked: true,
+                toolbar: {
+                    show: true,
+                    autoSelected: 'zoom'
+                },
+            },
+            colors: ['#a5c2f1', '#2a77f4', '#15c201'],
+            dataLabels: {
+                enabled: false
+            },
+            stroke: {
+                curve: 'smooth',
+                width: [3, 3, 5],
+                dashArray: [1, 1, 8],
+                lineCap: 'round'
+            },
+            grid: {
+                borderColor: "#45404a2e",
+                padding: {
+                    left: 0,
+                    right: 0
+                },
+                strokeDashArray: 4,
+            },
+            markers: {
+                size: 0,
+                hover: {
+                    size: 0
+                }
+            },
+            series: [{
+                name: 'Tolerancia Max',
+                data: serieTolPos,
+            }, {
+                name: 'Tolerancia Min',
+                data: serieTolNeg,
+            }, {
+                name: 'Valor real',
+                data: serieSilo1,
+            }],
+
+            xaxis: {
+
+                categories: serieBatch1,
+                axisBorder: {
+                    show: true,
+                    color: '#45404a2e',
+                },
+                axisTicks: {
+                    show: true,
+                    color: '#45404a2e',
+                },
+            },
+
+            fill: {
+                type: "gradient",
+                gradient: {
+                    shadeIntensity: 1,
+                    opacityFrom: 0.4,
+                    opacityTo: 0.3,
+                    stops: [0, 90, 100]
+                }
+            },
+
+            tooltip: {
+                x: {
+                    format: 'dd/MM/yy HH:mm'
+                },
+            },
+            legend: {
+                position: 'top',
+                horizontalAlign: 'left'
+            },
+        };
+        let temp = j;
+        if (serieSilo1.length == 0) {
+            temp = 0;
+        }
+
+        var chart = new ApexCharts(
+            document.querySelector(`#desvsilo${(temp)}`),
+            optionsSilo1
+        );
+        chart.render();
+    };
+
+
+
 };
